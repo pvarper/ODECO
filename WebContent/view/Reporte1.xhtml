@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>TABLA DE REGISTRO DE RECLAMACIÓN DIRECTA N° 1</title>
+
+</h:head>
+<body>
+
+	<ui:composition template="../resources/templates/simple.xhtml"
+		style="width:1500px">
+		<ui:define name="content" style="width:100%">
+
+			<center>
+				<h1>TABLA DE REGISTRO DE RECLAMACIÓN DIRECTA N° 1</h1>
+			</center>
+			<h:form id="form" enctype="multipart/form-data">
+
+				<p:panel header="RANGO DE FECHAS PARA EL FILTRADO"
+					style="width:100%">
+					<h:panelGrid columns="5">
+						<h:outputLabel value="FECHA INICIAL: *" styleClass="name"
+							style="text-align:right;" />
+						<p:calendar id="calendar1"
+							value="#{reportesBean.fechaInicialBusqueda}" locale="es"
+							pattern="dd/MM/yyyy">
+							<p:ajax process="calendar1" partialSubmit="true" event="change" />
+						</p:calendar>
+						<h:outputLabel value="FECHA FINAL: *" styleClass="name"
+							style="text-align:right;" />
+						<p:calendar id="calendar2"
+							value="#{reportesBean.fechaFinalBusqueda}" locale="es"
+							pattern="dd/MM/yyyy">
+							<p:ajax process="calendar2" partialSubmit="true" event="change" />
+						</p:calendar>
+						<p:commandButton actionListener="#{reportesBean.paginar()}"
+							style="padding-rigth:50px;"
+							styleClass="button validate botonActivar" id="buttonValidate2"
+							value="BUSCAR" ajax="false" update=":form" />
+					</h:panelGrid>
+				</p:panel>
+
+		
+			<p:scrollPanel mode="native" style="width:100%">
+				<p:dataTable id="tabla" var="row" style="width:100%"
+					value="#{reportesBean.listaOferta}" paginator="true" rows="10"
+					filteredValue="#{reportesBean.listaReporteFiltro}"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" widgetVar="filtroTabla"
+					rowStyleClass="#{row.estado == true ? false : null}"
+					emptyMessage="Datos no encontrados" selectionMode="single"
+					rowKey="#{row.formularioOdecoId}">
+
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="REPORTE 1" />
+						</p:outputPanel>
+					</f:facet>
+					<p:column id="numero" headerText="Nº"
+						sortBy="#{row.formularioOdecoId}" filterMatchMode="contains" update="form"
+						style="width:8%; text-align: center" filterStyle="width:80%">
+						<h:outputText value="#{row.formularioOdecoId}" />
+					</p:column>
+					<p:column id="numeroForm" headerText="Nº Form"
+						sortBy="#{row.codigoReclamacion}" filterMatchMode="contains"
+						filterBy="#{row.codigoReclamacion}"
+						style="width:10%; text-align: center">
+						<h:outputText value="#{row.codigoReclamacion}" />
+					</p:column>
+
+					<p:column id="ciudad" headerText="UBICACION DEL ODECO"
+						filterBy="#{row.ciudad.nombre}" filterMatchMode="contains"
+						style="width:12%; text-align: center">
+						<h:outputText value="#{row.ciudad.nombre}">
+						</h:outputText>
+					</p:column>
+					<p:column id="nombreR" headerText="DATOS DEL CONSUMIDOR"
+						filterBy="#{row.nombreReclamante}" filterMatchMode="contains"
+						style="width:25%; text-align: center" filterStyle="width:80%">
+						<h:outputText value="#{row.nombreReclamante}" />
+					</p:column>
+
+					<p:column id="motivo" headerText="TIPO RECLAMO" 
+						filterBy="#{row.listaMotivos}" filterMatchMode="contains"
+						style="width:25%; text-align: center" filterStyle="width:80%">
+						<h:outputText value="#{row.listaMotivos}" />
+					</p:column>
+
+					<p:column headerText="TIPO SERVICIO" filterBy="#{row.listaObjetos}"
+						filterMatchMode="contains" style="width:7%; text-align: center"
+						filterStyle="width:80%">
+						<h:outputText value="#{row.listaObjetos}" />
+					</p:column>
+
+					<p:column id="fechaR" headerText="FECHA RECLAMO"
+						sortBy="#{row.fechaReclamo}" filterBy="#{row.fechaReclamoFiltro}"
+						filterMatchMode="contains" style="text-align: center; width:12%;"
+						filterStyle="width:80%">
+						<h:outputText value="#{row.fechaReclamo}">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:outputText>
+					</p:column>
+
+					<p:column id="respuestaR" headerText="RESPUESTA DE LA RESOLUCION"
+						filterBy="#{row.respuestaOdeco.respuestaOdeco}"
+						filterMatchMode="contains" style="text-align: center; width:50%;"
+						filterStyle="width:80%">
+						<h:outputText value="#{row.respuestaOdeco.respuestaOdeco}" />
+					</p:column>
+
+					<p:column id="fechaRES" headerText="FECHA RESOLUCION"
+						sortBy="#{row.fechaResolucion}" filterBy="#{row.fechaResolucionFiltro}"
+						filterMatchMode="contains" style="text-align: center; width:12%;"
+						filterStyle="width:80%">
+						<h:outputText value="#{row.fechaResolucion}">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column id="medio" headerText="NOTIFICACION"
+						sortBy="#{row.medioNotificacion.descripcion}"
+						filterBy="#{row.medioNotificacion.descripcion}"
+						filterMatchMode="contains" style="text-align: center; width:12%;"
+						filterStyle="width:80%">
+						<h:outputText value="#{row.medioNotificacion.descripcion}">
+						</h:outputText>
+					</p:column>
+					
+					<p:column id="fechaS" headerText="FECHA SOLUCION"
+						sortBy="#{row.fechaCerrado}" filterBy="#{row.fechaCerradoFiltro}"
+						filterMatchMode="contains" style="text-align: center; width:12%;"
+						filterStyle="width:80%">
+						<h:outputText value="#{row.fechaCerrado}">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:outputText>
+					</p:column>
+
+				</p:dataTable>
+				</p:scrollPanel>
+				<h:panelGrid columns="2">
+					
+					
+
+					<h:commandLink id="reenviarLink"						
+						actionListener="#{reportesBean.exportar()}"						
+						 title="EXPORTAR">
+						 <h:panelGrid columns="1">
+						 <h:outputLabel value="EXPORTAR" styleClass="name"
+							style="text-align:right;" />
+						 <h:graphicImage id="deleteImage" alt="Eliminar"
+							url="/resources/icons/excel.png" styleClass="icon" />
+						 
+						 </h:panelGrid>			
+					</h:commandLink>
+					
+
+				</h:panelGrid>
+
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+
+</html>

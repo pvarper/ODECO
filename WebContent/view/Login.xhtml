@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<body>
+
+	<ui:composition template="../resources/templates/templateLogin.xhtml">
+
+
+		<ui:define name="content">
+			<h:form>
+				<center>
+
+
+
+					<table>
+						<tr>
+							<td align="center"><h1>Inicio de Sesion</h1></td>
+						</tr>
+						<tr>
+							<td width="100%" align="center">
+
+								<table border="0">
+									<tr>
+										<td align="right"><div id="logintitle"
+												style="color: #7C7C7C; text-size: 30px; font-weight: bold;">Usuario:</div></td>
+										<td align="left"><p:inputText id="userId"
+												styleClass="form-control" maxlength="50"
+												value="#{login.userId}"
+												validatorMessage="No se permiten caracteres especiales en Usuario">
+												<f:validateRegex pattern="^[0-9A-Za-z_ ñáéíóúÑÁÉÍÓÚ*.]+$" />
+											</p:inputText></td>
+									</tr>
+									<tr>
+										<td align="right"><div id="logintitle"
+												style="color: #7C7C7C; text-size: 30px; font-weight: bold;">Contraseña:</div></td>
+										<td align="left"><h:inputSecret id="password"
+												styleClass="form-control" maxlength="50"
+												value="#{login.password}" autocomplete="off"
+												validatorMessage="No se permiten caracteres especiales en Contraseña">
+												<f:validateRegex pattern="^[0-9A-Za-z_ ñáéíóúÑÁÉÍÓÚ*.]+$" />
+											</h:inputSecret></td>
+									</tr>
+									<tr>
+
+										<td colspan="2" align="center"><h:commandButton
+												styleClass="btn" id="login" action="#{login.verifyLogin}"
+												value="Iniciar sesion" /></td>
+									</tr>
+								</table>
+
+
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center"><h:messages
+									styleClass='error' for="userId" showDetail='false' /> <h:outputLabel
+									styleClass="error" value="#{login.messageError}"
+									style="color: #B71B1B; text-size: 15px;" /></td>
+						</tr>
+					</table>
+				</center>
+			</h:form>
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</body>
+
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>TABLA DE REGISTRO DE RECLAMACIÓN DIRECTA N° 2</title>
+
+</h:head>
+<body>
+
+	<ui:composition template="../resources/templates/simple.xhtml"
+		style="width:1500px">
+		<ui:define name="content" style="width:100%">
+
+			<center>
+				<h1>TABLA DE REGISTRO DE RECLAMACIÓN DIRECTA N° 2</h1>
+			</center>
+			<h:form id="form" enctype="multipart/form-data">
+
+				<p:panel header="RANGO DE FECHAS PARA EL FILTRADO"
+					style="width:100%">
+					<h:panelGrid columns="5">
+						<h:outputLabel value="FECHA INICIAL: *" styleClass="name"
+							style="text-align:right;" />
+						<p:calendar id="calendar1"
+							value="#{reportesBean.fechaInicialBusqueda}" locale="es"
+							pattern="dd/MM/yyyy">
+							<p:ajax process="calendar1" partialSubmit="true" event="change" />
+						</p:calendar>
+						<h:outputLabel value="FECHA FINAL: *" styleClass="name"
+							style="text-align:right;" />
+						<p:calendar id="calendar2"
+							value="#{reportesBean.fechaFinalBusqueda}" locale="es"
+							pattern="dd/MM/yyyy">
+							<p:ajax process="calendar2" partialSubmit="true" event="change" />
+						</p:calendar>
+						<p:commandButton actionListener="#{reportesBean.paginar2()}"
+							style="padding-rigth:50px;"
+							styleClass="button validate botonActivar" id="buttonValidate2"
+							value="BUSCAR" ajax="false" update=":form" />
+					</h:panelGrid>
+				</p:panel>
+				<p:scrollPanel mode="native" style="width:100%">
+					<p:dataTable id="tabla" var="row"
+						value="#{reportesBean.listaReporte2}" paginator="true" rows="10"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15" widgetVar="filtroTabla"
+						rowStyleClass="#{row.estado == true ? false : null}"
+						emptyMessage="Datos no encontrados" selectionMode="single"
+						rowKey="#{row.id}">
+						
+							<f:facet name="header">
+								<p:outputPanel>
+									<h:outputText value="REPORTE 2" />
+								</p:outputPanel>
+							</f:facet>
+							
+							<p:column id="mes" headerText="MES" sortBy="#{row.mes}"
+								filterMatchMode="contains" update="form"
+								style="width:8%; text-align: center" filterStyle="width:80%">
+								<h:outputText value="#{row.mes}" />
+							</p:column>
+
+							<p:column id="reclamosAtendidos"
+								headerText="RECLAMOS ATENDIDO EN ODECO (X)"
+								sortBy="#{row.reclamosAtendidos}" filterMatchMode="contains"
+								style="width:10%; text-align: center">
+								<h:outputText value="#{row.reclamosAtendidos}" />
+							</p:column>
+
+							<p:column id="resueltos"
+								headerText="RESUELTOS EN LOS PLAZOS ESTABLECIDOS (a)"
+								filterMatchMode="contains" style="width:12%; text-align: center">
+								<h:outputText value="#{row.resueltosPlazoEstablecidos}">
+								</h:outputText>
+							</p:column>
+							<p:column id="pendientes"
+								headerText="RECLAMOS PENDIENTES EN ODECO (b)"
+								filterMatchMode="contains" style="width:25%; text-align: center"
+								filterStyle="width:80%">
+								<h:outputText value="#{row.reclamosPendientes}" />
+							</p:column>
+
+							<p:column id="anulados" headerText="RECLAMOS ANULADOS (c)"
+								filterMatchMode="contains" style="width:15%; text-align: center"
+								filterStyle="width:80%">
+								<h:outputText value="#{row.reclamosAnulados}" />
+							</p:column>
+
+							<p:column headerText="RECLAMOS ADMINISTRATIVOS "
+								filterMatchMode="contains" style="width:7%; text-align: center"
+								filterStyle="width:80%">
+								<h:outputText value="#{row.reclamosAdministrativos}" />
+							</p:column>
+
+							<p:column headerText="ANTIGÜEDAD DE LOS PENDIENTES (1)"
+								filterMatchMode="contains" style="width:7%; text-align: center"
+								filterStyle="width:80%">
+								<h:outputText value="#{row.antiguedadPendientes}" />
+							</p:column>
+						
+					</p:dataTable>
+				</p:scrollPanel>
+
+				<h:panelGrid columns="2">
+
+					<h:commandLink id="reenviarLink"						
+						actionListener="#{reportesBean.exportar2()}"						
+						 title="EXPORTAR">
+						 <h:panelGrid columns="1">
+						 <h:outputLabel value="EXPORTAR" styleClass="name"
+							style="text-align:right;" />
+						 <h:graphicImage id="deleteImage" alt="Eliminar"
+							url="/resources/icons/excel.png" styleClass="icon" />
+						 
+						 </h:panelGrid>			
+					</h:commandLink>
+
+
+				</h:panelGrid>
+
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+
+</html>

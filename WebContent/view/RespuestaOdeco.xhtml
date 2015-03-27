@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Respuesta Odeco</title>
+
+</h:head>
+<body>
+
+	<ui:composition template="../resources/templates/simple.xhtml">
+		<ui:define name="content">
+
+			<h:form id="formPanel">
+				<center>
+					<h1>RESPUESTA ODECO</h1>
+
+
+					<h:inputHidden value="#{respuestaOdecoBean.idOfertaStr}" />
+					<h:inputHidden value="#{respuestaOdecoBean.edit}" />
+
+					<p:panel header="INFORMACION GENERAL" style="width: 350px">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Id Objeto Reclamo :"
+								rendered="#{respuestaOdecoBean.edit}" styleClass="name" />
+							<p:inputText value="#{respuestaOdecoBean.idOfertaStr}"
+								style="width: 200px;" rendered="#{respuestaOdecoBean.edit}"
+								disabled="true" size="29" maxlength="50" />
+
+							<h:outputLabel value="RESPUESTA ODECO: *" styleClass="name" />
+							<p:inputText id="idRespuesta" rows="1" cols="40" style="width: 200px;"
+								value="#{respuestaOdecoBean.oferta.respuestaOdeco}"
+								maxlength="50"
+								validatorMessage="No se permiten caracteres especiales Respuesta Odeco">
+								<f:validateRegex pattern="#{respuestaOdecoBean.expresionRegular}" />
+							</p:inputText>
+
+							<h:outputLabel value="DESCRIPCIÓN: " styleClass="name" />
+							<p:inputText id="descripcion" rows="1" cols="40"
+								style="width: 200px;"
+								value="#{respuestaOdecoBean.oferta.descripcion}" maxlength="80"
+								validatorMessage="No se permiten caracteres especiales en Descripcion">
+								<f:validateRegex pattern="#{respuestaOdecoBean.expresionRegular}" />
+							</p:inputText>
+
+						</h:panelGrid>
+
+						<h:panelGrid columns="2" cellpadding="5">
+							<p:commandButton actionListener="#{respuestaOdecoBean.save()}"
+								styleClass="button validate btnOfertas" id="buttonValidate"
+								value="Guardar" ajax="true" update=":formPanel, :formTable"
+								icon="ui-icon-disk" />
+							<p:commandButton
+								actionListener="#{respuestaOdecoBean.newObject()}"
+								id="buttonNuevo" value="Cancelar" ajax="true"
+								update=":formPanel, :formTable" icon="ui-icon-cancel" />
+
+						</h:panelGrid>
+					</p:panel>
+				</center>
+			</h:form>
+
+			<h:form id="formTable">
+				<center>
+
+					<p:dataTable id="tabla" var="row"
+						value="#{respuestaOdecoBean.listaOferta}" paginator="true"
+						rows="10"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15" widgetVar="filtroTabla"
+						emptyMessage="Datos no encontrados">
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="LISTA DE RESPUESTAS DE ODECO" />
+								<br />
+
+							</p:outputPanel>
+						</f:facet>
+
+						<p:column id="codigoOfertas" headerText="ID"
+							sortBy="#{row.respuestaOdecoId}"
+							filterBy="#{row.respuestaOdecoId}" filterMatchMode="startsWith"
+							style="text-align: center; width:5%;">
+							<h:outputText value="#{row.respuestaOdecoId}" />
+						</p:column>
+
+						<p:column id="respuestaColumna" headerText="RESPUESTA ODECO"
+							sortBy="#{row.respuestaOdeco}" filterBy="#{row.respuestaOdeco}"
+							filterMatchMode="contains" style="text-align: center; width:25%;"
+							filterStyle="width:80%">
+							<h:outputText value="#{row.respuestaOdeco}" />
+						</p:column>
+
+						<p:column id="descripcionColumna" headerText="DESCRIPCION"
+							sortBy="#{row.descripcion}" filterBy="#{row.descripcion}"
+							filterMatchMode="contains" style="text-align: center; width:25%;"
+							filterStyle="width:80%">
+							<h:outputText value="#{row.descripcion}" />
+						</p:column>
+
+						<p:column style="text-align: center; width:6%;"
+							headerText="ACCIONES">
+
+							<h:commandLink id="editLink"
+								actionListener="#{respuestaOdecoBean.select()}" ajax="false"
+								update=":formPanel" title="Modificar">
+								<h:graphicImage id="editImage" alt="Modificar"
+									url="/resources/icons/edit.png" styleClass="icon" />
+								<f:param name="id_objeto" value="#{row.respuestaOdecoId}" />
+							</h:commandLink>
+
+							<h:commandLink id="deleteLink"
+								actionListener="#{respuestaOdecoBean.remove()}"
+								onclick="return confirm('¿Esta seguro que desea eliminar este registro?');"
+								ajax="true" update="formTable" title="Eliminar">
+								<h:graphicImage id="deleteImage" alt="Eliminar"
+									url="/resources/icons/delete.png" styleClass="icon" />
+								<f:param name="id_objeto" value="#{row.respuestaOdecoId}" />
+							</h:commandLink>
+						</p:column>
+					</p:dataTable>
+
+				</center>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</body>
+
+</html>

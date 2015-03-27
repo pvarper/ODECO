@@ -1,0 +1,569 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Formulario Odeco Primera Instancia</title>
+
+</h:head>
+<body>
+
+	<ui:composition template="../resources/templates/simple.xhtml">
+		<ui:define name="content">
+			<center>
+				<h1>FORMULARIO PRIMERA INSTANCIA</h1>
+
+			</center>
+
+			<h:form id="formTable">
+
+				<p:panel id="idPnl" style="width: 100%">
+					<f:facet name="header">
+						<p:commandButton id="addLink"
+							value="Nuevo Formulario ODECO Primera Instancia"
+							actionListener="#{formularioOdecoBean.newObject()}"
+							oncomplete="dlg3.show();" update=":formPanel">
+						</p:commandButton>
+					</f:facet>
+					<p:scrollPanel mode="native" style="width:100%">
+						<p:dataTable id="tabla" var="row"
+							value="#{formularioOdecoBean.listaOferta}" paginator="true"
+							rows="10"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15" widgetVar="filtroTabla"
+							emptyMessage="Datos no encontrados"
+							rowStyleClass="#{row.estado == true ? false : null}"
+							selection="#{formularioOdecoBean.selectOdeco}"
+							selectionMode="single" rowKey="#{row.formularioOdecoId}">
+
+							<p:ajax event="rowSelect" update=":display"
+								oncomplete="odecoDialog.show()" />
+
+							<f:facet name="header">
+								<p:outputPanel>
+									<h:outputText value="LISTA DE FORMULARIOS ODECO" />
+									<br />
+
+								</p:outputPanel>
+							</f:facet>
+
+							<p:column id="codigoOfertas" headerText="Id"
+								sortBy="#{row.formularioOdecoId}"
+								filterBy="#{row.formularioOdecoId}" filterMatchMode="startsWith"
+								style="text-align: center; " width="3%">
+								<h:outputText value="#{row.formularioOdecoId}" />
+							</p:column>
+
+							<p:column id="codigoReclamacionColumna" headerText="CODIGO DE RECLAMO"
+								sortBy="#{row.codigoReclamacion}"
+								filterBy="#{row.codigoReclamacion}" filterMatchMode="contains"
+								style="text-align: center; width:25%;" filterStyle="width:80%">
+								<h:outputText value="#{row.codigoReclamacion}" />
+							</p:column>
+
+
+							<p:column id="clienteColumnsa" headerText="CLIENTE"
+								sortBy="#{row.nombreReclamante}"
+								filterBy="#{row.nombreReclamante}" filterMatchMode="contains"
+								style="text-align: center; width:25%;" filterStyle="width:80%">
+								<h:outputText value="#{row.nombreReclamante}" />
+							</p:column>
+
+							<p:column id="registradoColumna" headerText="REGISTRADO POR:"
+								sortBy="#{row.usuario.login}" filterBy="#{row.usuario.login}"
+								filterMatchMode="contains"
+								style="text-align: center; width:25%;" filterStyle="width:80%">
+								<h:outputText value="#{row.usuario.login}" />
+							</p:column>
+
+							<p:column id="responsableColumna" headerText="RESPONSABLE:"
+								sortBy="#{row.revisar}" filterBy="#{row.revisar}"
+								filterMatchMode="contains"
+								style="text-align: center; width:25%;" filterStyle="width:80%">
+								<h:outputText value="#{row.revisar}" />
+							</p:column>
+
+							<p:column id="fechaReclamoColumna" headerText="FECHA REGISTRO"
+								sortBy="#{row.fechaReclamo}"
+								filterBy="#{row.fechaReclamoFiltro}" filterMatchMode="contains"
+								style="text-align: center; width:25%;" filterStyle="width:80%">
+								<h:outputText value="#{row.fechaReclamo}">
+									<f:convertDateTime pattern="dd-MM-yyyy" />
+								</h:outputText>
+							</p:column>
+
+							<p:column id="fechaCerradoColumna" headerText="FECHA DE SOLUCION"
+								sortBy="#{row.fechaCerrado}"
+								filterBy="#{row.fechaCerradoFiltro}" filterMatchMode="contains"
+								style="text-align: center; width:25%;" filterStyle="width:80%">
+								<h:outputText value="#{row.fechaCerrado}">
+									<f:convertDateTime pattern="dd-MM-yyyy" />
+								</h:outputText>
+							</p:column>
+
+
+
+							<p:column id="respuestaOdecoColumna" headerText="RESPUESTA ODECO"
+								sortBy="#{row.respuestaOdeco}" filterBy="#{row.respuestaOdeco}"
+								filterMatchMode="contains"
+								style="text-align: center; width:25%;" filterStyle="width:80%">
+								<h:outputText value="#{row.respuestaOdeco.respuestaOdeco}" />
+							</p:column>
+
+
+							<p:column id="estadoRespuestaColumna" headerText="ESTADO RESPUESTA"
+								sortBy="#{row.estadoRespuesta}"
+								filterBy="#{row.estadoRespuesta}" filterMatchMode="contains"
+								style="text-align: center; width:25%;" filterStyle="width:80%">
+								<h:outputText value="#{row.estadoRespuesta}" />
+							</p:column>
+
+							<p:column id="lineaReclamoColumna" headerText="LINEA RECLAMO"
+								sortBy="#{row.lineaReclamo}" filterBy="#{row.lineaReclamo}"
+								filterMatchMode="contains"
+								style="text-align: center; width:25%;" filterStyle="width:80%">
+								<h:outputText value="#{row.lineaReclamo}" />
+							</p:column>
+
+							<p:column style="text-align: center; width:6%;"
+								headerText="ACCIONES">
+
+								<p:commandButton value="" ajax="false"
+									onclick="PrimeFaces.monitorDownload(start, stop);"
+									style="height:25px; width:24px; border:0px none; background:transparent  url('../resources/icons/Button-Download.png;');">
+									<p:fileDownload
+										value="#{formularioOdecoBean.getFile(row.formularioOdecoId)}" />
+								</p:commandButton>
+
+
+							</p:column>
+
+
+						</p:dataTable>
+					</p:scrollPanel>
+				</p:panel>
+			</h:form>
+
+
+			<p:dialog header="DETALLES DEL ODECO" widgetVar="odecoDialog"
+				resizable="false" modal="true" appendToBody="true" width="500px"
+				showEffect="explode" hideEffect="explode">
+				<h:panelGrid id="display" columns="4" cellpadding="5">
+
+					<h:outputText value="Ciudad de Reclamacion"
+						style="font-weight : bold;" />
+					<h:outputText value="#{formularioOdecoBean.selectOdeco.ciudad}" />
+					<h:outputText value="Codigo Reclamo" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.codigoReclamacion}"
+						id="model1" />
+					<h:outputText value="Nombre Reclamante" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.nombreReclamante}" />
+					<h:outputText value="Nombre Titular" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.nombreTitular}" />
+					<h:outputText value="Dirección de Reclamo"
+						style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.direccionDomicilio}" />
+					<h:outputText value="Dirección de Notificación"
+						style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.direccionNotificacion}" />
+					<h:outputText value="Fecha Registro" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.fechaReclamo}"
+						id="model4" >
+						<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:outputText>
+					<h:outputText value="Fecha Incidencia" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.fechaIncidencia}" >
+						<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:outputText>
+					<h:outputText value="Objetos Reclamos" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.getObjetosReclamos(formularioOdecoBean.selectOdeco.formularioOdecoId)}" />
+					<h:outputText value="Motivos Reclamos" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.getMotivosReclamos(formularioOdecoBean.selectOdeco.formularioOdecoId)}" />
+
+					<h:outputText value="Periodo de Objeto" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.periodoObjetoReclamo}" />
+					<h:outputText value="Ciudad / Localidad"
+						style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.ciudadLocalidad}" />
+					<h:outputText value="Correo" style="font-weight : bold;" />
+					<h:outputText value="#{formularioOdecoBean.selectOdeco.correo}" />
+					<h:outputText value="Fax" style="font-weight : bold;" />
+					<h:outputText value="#{formularioOdecoBean.selectOdeco.fax}" />
+					<h:outputText value="Medio de Notificacion"
+						style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.medioNotificacion}" />
+					
+					<h:outputText value="Forma de Registro"
+						style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.formaRegistro}" />	
+
+					<h:outputText value="Detalle Motivo " style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.detalleMotivoReclamacion}" />
+
+					<h:outputText value="Cliente" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.nombreReclamante}"
+						id="model2" />
+					<h:outputText value="Registrado por" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.usuario.nombre}"
+						id="model3" />
+
+					<h:outputText value="Respuesta Odeco" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.respuestaOdeco.respuestaOdeco}"
+						id="model5" />
+
+					<h:outputText value="Detalle de la Respuesta"
+						style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.detalleRespuesta}"
+						id="model7" />
+					<h:outputText value="Estado Respuesta" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.estadoRespuesta}"
+						id="model6" />
+					<h:outputText value="Fecha Cerrado" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.fechaCerrado}"
+						id="model8" >
+						<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:outputText>
+					<h:outputText value="Linea Reclamo" style="font-weight : bold;" />
+					<h:outputText
+						value="#{formularioOdecoBean.selectOdeco.lineaReclamo}" />
+
+				</h:panelGrid>
+			</p:dialog>
+
+
+			<p:dialog widgetVar="dlg3" modal="true" resizable="false"
+				closable="false" appendToBody="true">
+
+				<h:form id="formPanel">
+					<p:growl id="growl" showDetail="true" sticky="false" life="3000" 
+						autoUpdate="true" />
+					<center>
+						<h1>Formulario ODECO Primera Instancia</h1>
+						<p:scrollPanel mode="native" style="height:550px">
+							<p:panel id="panelG" header="Creando Odeco.."
+								style="width: 900px">
+
+								<h:panelGrid columns="4">
+
+									<h:outputLabel value="Ciudad Reclamación : *" styleClass="name" />
+									<p:selectOneMenu id="ciudadReclamacion"
+										value="#{formularioOdecoBean.selectCiudadReclamacion}"
+										style="width: 188px;"
+										onselect="#{formularioOdecoBean.selectCiudadReclamacion}">
+										<p:ajax event="change"
+											listener="#{formularioOdecoBean.generarCodigoReclamacion()}"
+											update="codigoReclamacion,display" />
+										<f:attribute name="optionClasses" value="option1, option2" />
+										<f:selectItems
+											value="#{formularioOdecoBean.selectCiudadesReclamacion}" />
+									</p:selectOneMenu>
+
+									<h:outputLabel value="Codigo Reclamación : *" styleClass="name" />
+									<p:inputText id="codigoReclamacion" rows="1" cols="40" readonly="true"
+										style="width: 180px;"
+										value="#{formularioOdecoBean.codigoReclamacion}"
+										maxlength="50" />
+
+									<h:outputText value="Nombre Reclamante : *" />
+									<p:inputText id="nombreReclamante" rows="1" cols="40"
+										style="width: 180px;"
+										value="#{formularioOdecoBean.oferta.nombreReclamante}"
+										maxlength="50"
+										validatorMessage="No se permiten caracteres especiales en Nombre Reclamante">
+										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegular}" />
+									</p:inputText>
+
+									<h:outputLabel value="Nombre Titular : *" styleClass="name" />
+									<p:inputText id="NombreTitular" rows="1" cols="40"
+										style="width: 180px;"
+										value="#{formularioOdecoBean.oferta.nombreTitular}"
+										maxlength="50"
+										validatorMessage="No se permiten caracteres especiales en Nombre Titular">
+										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegular}" />
+									</p:inputText>
+
+									<h:outputLabel value="Teléfono de Referencia : *"
+										styleClass="name" />
+									<p:inputText id="telefono" rows="1" cols="40"
+										style="width: 180px;"
+										value="#{formularioOdecoBean.oferta.telefonoReferencia}"
+										maxlength="8" validatorMessage="Solo caracteres numericos en Telefono de Referencia">
+										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegularNumero}" />
+									</p:inputText>
+
+									<h:outputLabel value="Línea Reclamo : *" styleClass="name" />
+									<p:inputText id="linea" rows="1" cols="40"
+										style="width: 180px;"
+										value="#{formularioOdecoBean.oferta.lineaReclamo}"
+										maxlength="8" validatorMessage="Solo caracteres numericos en Linea Reclamo">
+										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegularNumero}" />
+									</p:inputText>
+
+									<h:outputLabel value="Direccion de Reclamo: *"
+										styleClass="name" />
+									<p:inputText id="direccion" rows="1" cols="40"
+										style="width:180px;"
+										value="#{formularioOdecoBean.oferta.direccionDomicilio}"
+										maxlength="95"
+										validatorMessage="No se permiten caracteres especiales en Direccion de reclamo">
+										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegular}" />
+									</p:inputText>
+
+									<h:outputLabel value="Direccion Notificación : *"
+										styleClass="name" />
+									<p:inputText id="direccionNotificacion" rows="1" cols="40"
+										style="width: 180px;"
+										value="#{formularioOdecoBean.oferta.direccionNotificacion}"
+										maxlength="95"
+										validatorMessage="No se permiten caracteres especialesen Direccion de Notificacion">
+										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegular}" />
+									</p:inputText>
+
+									<h:outputLabel value="Fecha de Reclamo: " styleClass="name" />
+									<p:inputText id="fechaReclamo" rows="1" cols="40"
+										readonly="true" style="width: 180px;"
+										value="#{formularioOdecoBean.oferta.fechaReclamo}"
+										maxlength="50">
+										<f:convertDateTime pattern="dd-MM-yyyy" />
+									</p:inputText>
+
+									<h:outputLabel value="Fecha de Incidendia : *"
+										styleClass="name" />
+									<p:calendar id="fechaIncidencia" style="width: 180px;"
+										value="#{formularioOdecoBean.fechaIn}" navigator="true"
+										effect="slideDown" display="inline" pattern="dd-MM-yyyy">
+
+									</p:calendar>
+
+
+									<h:outputLabel value="Objeto de Reclamo : *" styleClass="name" />
+									<p:selectCheckboxMenu id="objR"
+										value="#{formularioOdecoBean.selectedObjetoReclamo}"
+										label="Objeto Reclamos" style="width: 188px" filter="true"
+										filterMatchMode="startsWith" panelStyle="width:250px">
+										<f:selectItems
+											value="#{formularioOdecoBean.selectObjetoReclamos}" />
+									</p:selectCheckboxMenu>
+
+									<h:outputLabel value="Motivo de Reclamación : *"
+										styleClass="name" />
+									<p:selectCheckboxMenu id="motRec"
+										value="#{formularioOdecoBean.selectedMotivoReclamo}"
+										label="Motivo Reclamos" style="width: 188px" filter="true"
+										filterMatchMode="startsWith" panelStyle="width:250px">
+
+										<f:selectItems
+											value="#{formularioOdecoBean.selectMotivoReclamos}" />
+										<p:ajax event="change"
+											listener="#{formularioOdecoBean.calcularPeriodoObjeto()}"
+											update="periodo" />
+										<p:ajax event="toggleSelect"
+											listener="#{formularioOdecoBean.handleChange}"
+											update="periodo" />
+
+
+									</p:selectCheckboxMenu>
+
+									<h:outputLabel value="Periodo Objeto Reclamo : *"
+										styleClass="name" />
+									<p:inputText id="periodo" rows="1" cols="40"
+										style="width: 180px;" readonly="true"
+										value="#{formularioOdecoBean.oferta.periodoObjetoReclamo}"
+										maxlength="50" />
+
+									<h:outputText value="Localidad/Sucursal : *" />
+									<p:selectOneMenu id="localidadSucursal" value="#{formularioOdecoBean.selectCiudad}"
+										style="width: 188px; "
+										onselect="#{formularioOdecoBean.selectCiudad}">
+										<f:attribute name="optionClasses" value="option1, option2" />
+										<f:selectItems value="#{formularioOdecoBean.selectCiudades}" />
+									</p:selectOneMenu>
+
+									<h:outputLabel value="Correo de Cliente: " styleClass="name" />
+									<p:inputText id="correo" rows="1" cols="40"
+										style="width: 180px;"
+										value="#{formularioOdecoBean.oferta.correo}" maxlength="50" />
+
+									<h:outputLabel value="Fax: " styleClass="name" />
+									<p:inputText id="fax" rows="1" cols="40" style="width: 180px;"
+										value="#{formularioOdecoBean.oferta.fax}" maxlength="8"
+										validatorMessage="Solo caracteres numericos en Fax">
+										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegularNumero}" />
+									</p:inputText>
+
+									<h:outputLabel value="Medio de Notificaci&#243;n" styleClass="name" />
+									<p:selectOneMenu id="medioNotificacion" style="width: 188px; "
+										value="#{formularioOdecoBean.selectMedioNotificacion}"
+										onselect="#{formularioOdecoBean.selectMedioNotificacion}">
+										<f:attribute name="optionClasses" value="option1, option2" />
+										<f:selectItems
+											value="#{formularioOdecoBean.selectMedioNotificaciones}" />
+									</p:selectOneMenu>
+
+									<h:outputText value="Cargar Adjuntos : *" />
+									<p:fileUpload
+										fileUploadListener="#{formularioOdecoBean.handleFileUpload}"
+										onstart="statusDialog.show()" oncomplete="statusDialog.hide()"
+										mode="advanced" auto="true" label="Seleccionar Archivo"
+										dragDropSupport="false" sizeLimit="104857600" multiple="true"
+										update="display,growl" invalidFileMessage="El tipo de Archivo no es correcto"
+										allowTypes="/(\.|\/)(txt|csv|xlsx|xls|doc|png|pdf|jpg|docx|jpeg)$/"
+										invalidSizeMessage="El tamaño es demasiado grande">
+									</p:fileUpload>
+									
+									<h:outputLabel value="Forma de Registro: *" styleClass="name" />
+									<p:selectOneMenu id="formaRegistro" style="width: 188px; "
+										value="#{formularioOdecoBean.formaRegistro}"
+										onselect="#{formularioOdecoBean.formaRegistro}">
+										<f:attribute name="optionClasses" value="option1, option2" />
+										<f:selectItems
+											value="#{formularioOdecoBean.listaFormaRegistro}" />
+									</p:selectOneMenu>
+
+
+								</h:panelGrid>
+
+								<h:panelGrid columns="1">
+									<p:outputPanel id="display"
+										style="width:250px;padding-left:5px;margin-top:20px">
+										<p:dataList value="#{formularioOdecoBean.selectedAdjuntos}"
+											ajax="true" var="city" emptyMessage="No cities selected">    
+											#{city}   										  
+       									 </p:dataList>
+									</p:outputPanel>
+									<h:outputLabel value="Motivo de Reclamación Directa detalle: *"
+										styleClass="name" />
+									<p:inputTextarea id="detalleRespuesta" rows="3" cols="40"
+										style="width: 620px;"
+										value="#{formularioOdecoBean.oferta.detalleMotivoReclamacion}"
+										maxlength="420"
+										validatorMessage="No se permiten caracteres especiales en Detalle de la Respuesta">
+										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegular}" />
+									</p:inputTextarea>
+
+								</h:panelGrid>
+
+								<h:panelGrid columns="5" cellpadding="5">
+
+
+
+
+
+									<p:commandButton actionListener="#{formularioOdecoBean.save()}"
+										styleClass="button validate btnOfertas" id="save"
+										value="Guardar y Enviar" ajax="true"
+										onclick="statusDialog.show()" oncomplete="statusDialog.hide()"
+										update=":formPanel, :formTable" icon="ui-icon-disk" />
+
+									<p:commandButton
+										actionListener="#{formularioOdecoBean.reenviar()}"
+										rendered="false" styleClass="button validate btnOfertas"
+										id="reenviar" value="Reenviar" ajax="true"
+										update=":formPanel, :formTable" icon="ui-icon-disk" />
+
+									<p:commandButton
+										actionListener="#{formularioOdecoBean.newObject()}"
+										id="buttonNuevo" value="Cancelar" ajax="true"
+										update=":formTable" icon="ui-icon-document"
+										oncomplete="dlg3.hide();" />
+								</h:panelGrid>
+							</p:panel>
+						</p:scrollPanel>
+					</center>
+				</h:form>
+
+
+			</p:dialog>
+
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+				header="Please wait..." appendToBody="true" closable="false"
+				resizable="false">
+				<h:graphicImage id="deleteImage" alt="Eliminar"
+					url="/resources/icons/ajax-loader-bar.gif" styleClass="icon" />
+
+			</p:dialog>
+
+			<p:dialog header="Adjuntos" widgetVar="dlg2" modal="true"
+				closeOnEscape="true" resizable="false" showEffect="fade"
+				hideEffect="explode" appendToBody="true">
+				<h:form id="frmitemsValidos">
+					<p:scrollPanel mode="native" style="width:1080px">
+						<p:dataTable id="tt2" style="text-align:center" var="row"
+							filterBy="#{row.id}"
+							value="#{procesamientoCargaTicketBean.listInvalidos}"
+							paginator="true" rows="10"
+							emptyMessage="No existen items invalidos" rowKey="#{row.id}"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+
+							<f:facet name="header">  
+		                                        LISTA DE ADJUNTOS
+		                                    </f:facet>
+
+
+							<p:column headerText="ID" filterBy="#{row.id}">
+								<h:outputText value="#{row.id}" />
+							</p:column>
+							<p:column headerText="NOMBRE DE ADJUNTO"
+								filterBy="#{row.descripcion}">
+								<h:outputText value="#{row.descripcion}" />
+							</p:column>
+
+							<p:column headerText="ODECO"
+								filterBy="#{row.formularioOdeco.codigoReclamacion}">
+								<h:outputText value="#{row.formularioOdeco.codigoReclamacion}" />
+							</p:column>
+
+							<p:column headerText="RUTA" filterBy=" #{row.ruta}">
+								<h:outputText value="#{row.ruta}" />
+							</p:column>
+							<p:column headerText="Tipo Formulario"
+								filterBy=" #{row.formularioOdeco.tipoFormulario.descripcion}">
+								<h:outputText
+									value="#{row.formularioOdeco.tipoFormulario.descripcion}" />
+							</p:column>
+							<p:column headerText="Login" filterBy=" #{row.login}">
+								<h:outputText value="#{row.login}" />
+							</p:column>
+							<p:column headerText="Rol" filterBy=" #{row.rol}">
+								<h:outputText value="#{row.rol}" />
+							</p:column>
+
+
+
+						</p:dataTable>
+					</p:scrollPanel>
+				</h:form>
+			</p:dialog>
+
+
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+
+</html>

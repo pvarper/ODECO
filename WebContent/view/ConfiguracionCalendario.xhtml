@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Configuracion Calendario</title>
+
+</h:head>
+<body>
+
+	<ui:composition template="../resources/templates/simple.xhtml">
+		<ui:define name="content">
+
+			<h:form id="formPanel">
+				<p:growl id="growl" showDetail="true" sticky="false"   life="3000"
+					autoUpdate="true" />
+				<center>
+					<h1>CONFIGURACION CALENDARIO</h1>
+
+
+					<h:inputHidden value="#{configuracionCalendarioBean.idOfertaStr}" />
+					<h:inputHidden value="#{configuracionCalendarioBean.edit}" />
+
+					<p:panel header="INFORMACION GENERAL" style="width: 350px">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Id Configuracion :"
+								rendered="#{configuracionCalendarioBean.edit}" styleClass="name" />
+							<p:inputText value="#{configuracionCalendarioBean.idOfertaStr}"
+								rendered="#{configuracionCalendarioBean.edit}" disabled="true"
+								size="29" maxlength="50"
+								validatorMessage="Solo caracteres numericos en Id Configuracion">
+								<f:validateRegex pattern="#{configuracionCalendarioBean.expresionRegularNumero}" />
+							</p:inputText>
+
+
+
+							<h:outputText value="CIUDAD : *" />
+							<p:selectOneMenu id="selectCiudad"
+								value="#{configuracionCalendarioBean.selectCiudad}"
+								style="width: 188px;"
+								onselect="#{configuracionCalendarioBean.selectCiudad}">
+								<f:attribute name="optionClasses" value="option1, option2" />
+								<f:selectItems
+									value="#{configuracionCalendarioBean.selectCiudades}" />
+							</p:selectOneMenu>
+
+							<h:outputLabel value="MOTIVO : *" styleClass="name" />
+							<p:inputText id="motivo" rows="1" cols="40" style="width: 180px;"
+								value="#{configuracionCalendarioBean.oferta.motivo}"
+								maxlength="50"
+								validatorMessage="No se permiten caracteres especiales en Motivo">
+								<f:validateRegex pattern="#{configuracionCalendarioBean.expresionRegular}" />
+							</p:inputText>
+
+							<h:outputText value="FECHA: *" />
+							<p:calendar id="fecha" value="#{configuracionCalendarioBean.fecha}"
+								navigator="true" effect="slideDown" display="inline"
+								pattern="dd-MM-yyyy">
+							</p:calendar>
+
+
+
+						</h:panelGrid>
+
+						<h:panelGrid columns="2" cellpadding="5">
+
+							<p:commandButton id="botonGuardar"
+								actionListener="#{configuracionCalendarioBean.save()}"
+								styleClass="button validate btnOfertas" 
+								value="Guardar" ajax="true" update=":formPanel, :formTable"
+								icon="ui-icon-disk" />
+							<p:commandButton id="botoCancelar"
+								actionListener="#{configuracionCalendarioBean.newObject()}"
+								 value="Cancelar" ajax="true"
+								update=":formPanel, :formTable" icon="ui-icon-cancel" />
+
+						</h:panelGrid>
+					</p:panel>
+				</center>
+			</h:form>
+
+			<h:form id="formTable">
+				<center>
+
+					<p:dataTable id="tabla" var="row"
+						value="#{configuracionCalendarioBean.listaOferta}"
+						paginator="true" rows="10"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15" widgetVar="filtroTabla"
+						emptyMessage="Datos no encontrados">
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="LISTA DE CONFIGURACION DE CALENDARIO" />
+								<br />
+
+							</p:outputPanel>
+						</f:facet>
+
+						<p:column id="calendarioID" headerText="ID"
+							sortBy="#{row.calendarioId}" filterBy="#{row.calendarioId}"
+							filterMatchMode="startsWith"
+							style="text-align: center; width:5%;">
+							<h:outputText value="#{row.calendarioId}" />
+						</p:column>
+
+						<p:column id="fecha" headerText="FECHA" sortBy="#{row.fecha}"
+							filterBy="#{row.fechaFiltro}" filterMatchMode="contains"
+							style="text-align: center; width:25%;" filterStyle="width:80%">
+							<h:outputText value="#{row.fecha}">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</h:outputText>
+						</p:column>
+
+						<p:column id="motivo" headerText="MOTIVO " sortBy="#{row.motivo}"
+							filterBy="#{row.motivo}" filterMatchMode="contains"
+							style="text-align: center; width:25%;" filterStyle="width:80%">
+							<h:outputText value="#{row.motivo}" />
+						</p:column>
+
+						<p:column id="ciudad" headerText="CIUDAD" sortBy="#{row.ciudad}"
+							filterBy="#{row.ciudad}" filterMatchMode="contains"
+							style="text-align: center; width:25%;" filterStyle="width:80%">
+							<h:outputText value="#{row.ciudad}" />
+						</p:column>
+
+						<p:column style="text-align: center; width:6%;"
+							headerText="ACCIONES">
+
+							<h:commandLink id="editLink"
+								actionListener="#{configuracionCalendarioBean.select()}"
+								ajax="false" update=":formPanel" title="Modificar">
+								<h:graphicImage id="editImage" alt="Modificar"
+									url="/resources/icons/edit.png" styleClass="icon" />
+								<f:param name="id_objeto" value="#{row.calendarioId}" />
+							</h:commandLink>
+
+							<h:commandLink id="deleteLink"
+								actionListener="#{configuracionCalendarioBean.remove()}"
+								onclick="return confirm('¿Esta seguro que desea eliminar este registro?');"
+								ajax="true" update="formTable" title="Eliminar">
+								<h:graphicImage id="deleteImage" alt="Eliminar"
+									url="/resources/icons/delete.png" styleClass="icon" />
+								<f:param name="id_objeto" value="#{row.calendarioId}" />
+							</h:commandLink>
+						</p:column>
+					</p:dataTable>
+
+				</center>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</body>
+
+</html>

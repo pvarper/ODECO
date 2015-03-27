@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>FLUJO</title>
+
+</h:head>
+<body>
+
+	<ui:composition template="../resources/templates/simple.xhtml">
+		<ui:define name="content">
+
+			<h:form id="formPanel">
+				<center>
+					<h1>FLUJO</h1>
+
+
+					<h:inputHidden value="#{flujoBean.idOfertaStr}" />
+					<h:inputHidden value="#{flujoBean.edit}" />
+
+					<p:panel header="INFORMACION GENERAL" style="width: 350px">
+						<h:panelGrid columns="2">
+
+							<h:outputText value="Agente" />
+							<p:selectOneMenu id="selectAgente"
+								value="#{flujoBean.selectAgente}" style="width: 188px; "
+								onselect="#{flujoBean.selectAgente}">
+								<f:attribute name="optionClasses" value="option1, option2" />
+								<f:selectItems value="#{flujoBean.selectAgentes}" />
+							</p:selectOneMenu>
+
+							<h:outputText value="Staff" />
+							<p:selectOneMenu id="selectStaff"
+								value="#{flujoBean.selectStaff}" style="width: 188px; "
+								onselect="#{flujoBean.selectStaff}">
+								<f:attribute name="optionClasses" value="option1, option2" />
+								<f:selectItems value="#{flujoBean.selectStaffs}" />
+							</p:selectOneMenu>
+
+							<h:outputText value="Coordinador" />
+							<p:selectOneMenu id="selectCoordinador"
+								value="#{flujoBean.selectCoordinador}" style="width: 188px; "
+								onselect="#{flujoBean.selectCoordinador}">
+								<f:attribute name="optionClasses" value="option1, option2" />
+								<f:selectItems value="#{flujoBean.selectCoordinadores}" />
+							</p:selectOneMenu>
+
+							<h:outputText value="Regulación" />
+							<p:selectOneMenu id="selectRegulacion"
+								value="#{flujoBean.selectRegulacion}" style="width: 188px; "
+								onselect="#{flujoBean.selectRegulacion}">
+								<f:attribute name="optionClasses" value="option1, option2" />
+								<f:selectItems value="#{flujoBean.selectRegulaciones}" />
+							</p:selectOneMenu>
+
+							<h:outputText value="Estado" />
+							<p:selectOneMenu id="selectEstado"
+								value="#{flujoBean.selectEstado}" style="width: 188px; "
+								onselect="#{flujoBean.selectEstado}">
+								<f:attribute name="optionClasses" value="option1, option2" />
+								<f:selectItems value="#{flujoBean.selectEstados}" />
+							</p:selectOneMenu>
+
+							<p:commandButton id="botonGuardar"
+								actionListener="#{flujoBean.saveFlujo()}"
+								styleClass="button validate btnOfertas" value="Guardar"
+								ajax="true" update=":formPanel, :formTable" icon="ui-icon-disk" />
+
+						</h:panelGrid>
+
+					</p:panel>
+				</center>
+			</h:form>
+
+			<h:form id="formTable">
+				<center>
+
+					<p:dataTable id="tabla" var="row" style="width: 100%"
+						value="#{flujoBean.listaOferta}" paginator="true" rows="10"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15" widgetVar="filtroTabla"
+						emptyMessage="Datos no encontrados" rowKey="#{row.flujoId}">
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="LISTA DE OBJETOS RECLAMOS" />
+								<br />
+
+							</p:outputPanel>
+						</f:facet>
+
+						<p:column id="id" headerText="Id" sortBy="#{row.flujoId}"
+							filterBy="#{row.flujoId}" filterMatchMode="startsWith"
+							style="text-align: center; width:5%;">
+							<h:outputText value="#{row.flujoId}" />
+						</p:column>
+
+						<p:column id="Nombre" headerText="Nombre" sortBy="#{row.nombre}"
+							filterBy="#{row.nombre}" filterMatchMode="startsWith"
+							style="text-align: center; width:5%;">
+							<h:outputText value="#{row.nombre}" />
+						</p:column>
+
+						<p:column id="Agente" headerText="Agente" sortBy="#{row.agente}"
+							filterBy="#{row.agente}" filterMatchMode="contains"
+							style="text-align: center; width:25%;" filterStyle="width:80%">
+							<h:outputText value="#{row.agente}" />
+						</p:column>
+
+						<p:column id="Staff" headerText="Staff" sortBy="#{row.staff}"
+							filterBy="#{row.staff}" filterMatchMode="contains"
+							style="text-align: center; width:25%;" filterStyle="width:80%">
+							<h:outputText value="#{row.staff}" />
+						</p:column>
+
+						<p:column id="Coordinador" headerText="Coordinador"
+							sortBy="#{row.coordinador}" filterBy="#{row.coordinador}"
+							filterMatchMode="contains" style="text-align: center; width:25%;"
+							filterStyle="width:80%">
+							<h:outputText value="#{row.coordinador}" />
+						</p:column>
+
+						<p:column id="Regulacion" headerText="Regulacion"
+							sortBy="#{row.regulacion}" filterBy="#{row.regulacion}"
+							filterMatchMode="contains" style="text-align: center; width:25%;"
+							filterStyle="width:80%">
+							<h:outputText value="#{row.regulacion}" />
+						</p:column>
+
+
+						<p:column id="estado" headerText="Estado" sortBy="#{row.estado}"
+							filterBy="#{row.estado}" filterMatchMode="contains"
+							style="text-align: center; width:25%;" filterStyle="width:80%">
+							<h:outputText value="#{row.estado}" />
+						</p:column>
+
+						<!-- 	<p:column style="text-align: center; width:6%;"
+							headerText="ACCIONES">
+					
+								<h:commandLink id="editLink"
+								actionListener="#{flujoBean.select(row.flujoId)}" ajax="false"
+								update=":formPanel" title="Modificar">
+								<h:graphicImage id="editImage" alt="Modificar"
+									url="/resources/icons/edit.png" styleClass="icon" />
+								<f:param name="id_objeto" value="#{row.flujoId}" />
+							</h:commandLink>
+				
+						</p:column>
+						 -->
+					</p:dataTable>
+
+				</center>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</body>
+
+</html>

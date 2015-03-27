@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report6" pageWidth="1517" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="1477" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="053dcb6d-594b-4f3d-8cb7-3e4225a69b03">
+	<property name="ireport.zoom" value="1.1000000000000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechareporte" class="java.lang.String"/>
+	<parameter name="Logo" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="formularioOdecoId" class="java.lang.Integer"/>
+	<field name="codigoReclamacion" class="java.lang.String"/>
+	<field name="nombreCiudad" class="java.lang.String"/>
+	<field name="nombreReclamante" class="java.lang.String"/>
+	<field name="listaMotivos" class="java.lang.String"/>
+	<field name="listaObjetos" class="java.lang.String"/>
+	<field name="fechaResolucionString" class="java.lang.String"/>
+	<field name="respuestaOdecoDescripcion" class="java.lang.String"/>
+	<field name="medioNotificacionDescripcion" class="java.lang.String"/>
+	<field name="fechaReclamoString" class="java.lang.String"/>
+	<field name="fechaCerradoString" class="java.lang.String"/>
+	<field name="lineaReclamo" class="java.lang.String"/>
+	<field name="detalleRespuesta" class="java.lang.String"/>
+	<field name="estadoRespuesta" class="java.lang.String"/>
+	<field name="formaRegistro" class="java.lang.String"/>
+	<field name="revisar" class="java.lang.String"/>
+	<field name="vencidos" class="java.lang.String"/>
+	<field name="tiempoSolucion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="134" splitType="Stretch">
+			<staticText>
+				<reportElement x="199" y="33" width="423" height="20" uuid="2e2140ec-38ef-4ab5-a8fa-cb2d2036adb2"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[TABLA DE REGISTRO DE RECLAMACION DIRECTA Nro. 6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="53" width="457" height="20" uuid="9cc3b418-e838-4d3a-be2e-158c97a91709"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[UNIDAD DE PLANIFICACION NORMAS Y GESTION POR RESULTADOS ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="73" width="199" height="20" uuid="562fa77c-c4ab-4e84-86b1-5f4bb36b9e94"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[CONTROL DE RECLAMOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="93" width="621" height="20" uuid="969566c8-9f19-4ad0-8ff9-ec6c2c77990b"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[PROGRAMA DE SEGUIMIENTO CUMPLIMIENTO INSTRUCTIVO PARA LA ATENCION DE RECLAMACIONES (ODECO)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="113" width="368" height="20" uuid="97ebc813-8748-48ee-ab34-25c8a0f11750"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[OFICINA DEL CONSUMIDOR REGISTRO DE RECLAMACIONES DIRECTAS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="0" width="104" height="53" uuid="a4386c97-a247-42c1-87c4-c71fbb6cd931">
+					<property name="net.sf.jasperreports.export.pdf.tag.colspan" value="3"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yy">
+				<reportElement x="368" y="113" width="89" height="20" uuid="40d9d0cc-97d1-4fd2-938c-f7890bc9c908"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="457" y="113" width="79" height="20" uuid="3268628f-263d-4290-be28-b3d42b8faecc"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="59">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="-1" width="30" height="44" backcolor="#CCCCCC" uuid="ed374c42-4d29-4eef-93ea-703c576b3358"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nº ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="864" y="-1" width="101" height="44" backcolor="#CCCCCC" uuid="eaf34a6a-99e7-42b1-8378-0b7d4426be0a"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[RESPUESTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1138" y="-1" width="81" height="44" backcolor="#CCCCCC" uuid="a86abdd7-b96d-4b7d-9e25-461c703441ef"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="30" y="-1" width="75" height="44" backcolor="#CCCCCC" uuid="808ea06e-7ab9-489a-a07f-bb0b0452368c"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[DATOS DEL CONSUMIDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="105" y="-1" width="94" height="44" backcolor="#CCCCCC" uuid="ea74cc1e-ff31-4b06-acf5-a2a4ff9db995"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SERVICIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="199" y="-1" width="93" height="44" backcolor="#CCCCCC" uuid="99ec9b21-c36a-494e-9ef6-e74ff5690932"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SERVICIO RECLAMO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="368" y="-1" width="89" height="44" backcolor="#CCCCCC" uuid="ae6c3908-664b-41ba-8c03-447cbd219ee5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[PROCEDENTE/ IMPROCEDENTE/PARCIALMENTE PROCEDENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="457" y="-1" width="79" height="44" backcolor="#CCCCCC" uuid="00b4e0f5-f286-4ac8-bb0b-e8ed2950d24c"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[FECHA DE RECLAMO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="536" y="-1" width="86" height="44" backcolor="#CCCCCC" uuid="56a96b7a-4829-4431-a2b5-844bab1445f9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[FECHA SOLUCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="622" y="-1" width="92" height="44" backcolor="#CCCCCC" uuid="feb1ad12-ce8c-4c9c-be1c-fb69896cb7c1"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[FECHA VENCIMIENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="714" y="-1" width="78" height="44" backcolor="#CCCCCC" uuid="e4081c78-c58d-4039-8cb7-1b31e77d130b"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[VENCIDOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="965" y="-1" width="98" height="44" backcolor="#CCCCCC" uuid="6f56f2df-701b-40d2-b74c-be1407740814"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[MEDIO POR EL QUE SE LE INFORMO LA RESPUESTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1063" y="-1" width="75" height="44" backcolor="#CCCCCC" uuid="adeffb62-69ce-466c-9695-4d6ebf6e6428"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CIUDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="292" y="-1" width="76" height="44" backcolor="#CCCCCC" uuid="251aed8c-ff39-43bb-b826-64cb36c330c3"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nro. Objeto del Reclamo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="792" y="-1" width="72" height="44" backcolor="#CCCCCC" uuid="cf2b7ad4-1a21-4e07-9c37-ea96540fa489"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TIEMPO DE SOLUCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1300" y="0" width="81" height="44" backcolor="#CCCCCC" uuid="3a498b19-4020-4ceb-bdc4-ab46f20cfe26"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SAC/CALL/ MI RECLAMO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1381" y="0" width="95" height="44" backcolor="#CCCCCC" uuid="ebc33e1a-11b8-402d-acf5-e2885de80226"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[RESPONSABLE DEL ODECO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1219" y="0" width="81" height="44" backcolor="#CCCCCC" uuid="a642f6a2-a38c-44b6-bf13-c14cab364586"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TIPO DE SERVICIO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="118" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="30" y="0" width="75" height="44" isPrintWhenDetailOverflows="true" uuid="3fa2adf8-681a-4628-92ef-8dd36ed2bb5c"/>
+				<textFieldExpression><![CDATA[$F{nombreReclamante}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="105" y="0" width="94" height="44" isPrintWhenDetailOverflows="true" uuid="35e586f3-ce6b-420b-8d33-58fe3a8ade8c"/>
+				<textFieldExpression><![CDATA[$F{listaMotivos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="199" y="0" width="93" height="44" isPrintWhenDetailOverflows="true" uuid="efdf18a3-f016-4efd-b571-107d96142a1c"/>
+				<textFieldExpression><![CDATA[$F{listaObjetos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="622" y="0" width="92" height="44" isPrintWhenDetailOverflows="true" uuid="6770aa4e-0dec-4e62-9163-41b78cad76de"/>
+				<textFieldExpression><![CDATA[$F{fechaResolucionString}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="30" height="44" isPrintWhenDetailOverflows="true" uuid="b77875c5-808c-4cde-a916-39eba5b60cb1"/>
+				<textFieldExpression><![CDATA[$F{formularioOdecoId}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="457" y="0" width="79" height="44" isPrintWhenDetailOverflows="true" uuid="c9440b9a-8e6e-42d0-9b0a-639cd22274b2"/>
+				<textFieldExpression><![CDATA[$F{fechaReclamoString}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="536" y="0" width="86" height="44" isPrintWhenDetailOverflows="true" uuid="28c7b86d-1818-4e04-b447-ca8ccab91207"/>
+				<textFieldExpression><![CDATA[$F{fechaCerradoString}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="965" y="0" width="98" height="44" isPrintWhenDetailOverflows="true" uuid="ad260682-7aaa-458e-b320-7856fc0a490f"/>
+				<textFieldExpression><![CDATA[$F{medioNotificacionDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="1063" y="0" width="75" height="44" isPrintWhenDetailOverflows="true" uuid="69370803-85d2-436a-b30e-7d6e298e971c"/>
+				<textFieldExpression><![CDATA[$F{nombreCiudad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="368" y="0" width="89" height="44" isPrintWhenDetailOverflows="true" uuid="aa8b6847-330e-4cf2-b2c7-b2cabee7a1ee"/>
+				<textFieldExpression><![CDATA[$F{respuestaOdecoDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="292" y="0" width="76" height="44" isPrintWhenDetailOverflows="true" uuid="db93130d-c04e-4aa0-94ba-b7a1ba1f5c81"/>
+				<textFieldExpression><![CDATA[$F{lineaReclamo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="864" y="0" width="101" height="44" isPrintWhenDetailOverflows="true" uuid="c15d6089-ac04-442c-976f-951a6a8765ff"/>
+				<textFieldExpression><![CDATA[$F{detalleRespuesta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="1138" y="0" width="81" height="44" isPrintWhenDetailOverflows="true" uuid="e0dec401-42e4-41a1-9121-1fb4a8ed0d58"/>
+				<textFieldExpression><![CDATA[$F{estadoRespuesta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="1300" y="0" width="81" height="44" isPrintWhenDetailOverflows="true" uuid="73f761b1-f325-4d86-ba3c-39c260b9d754"/>
+				<textFieldExpression><![CDATA[$F{formaRegistro}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="714" y="0" width="78" height="44" isPrintWhenDetailOverflows="true" uuid="22a8260c-9b41-471a-b706-66c0d2b72638"/>
+				<textFieldExpression><![CDATA[$F{vencidos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="792" y="0" width="72" height="44" isPrintWhenDetailOverflows="true" uuid="af8a068e-d356-4df2-8e29-bdb819d69ea0"/>
+				<textFieldExpression><![CDATA[$F{tiempoSolucion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="1219" y="0" width="81" height="44" isPrintWhenDetailOverflows="true" uuid="4e05d8e7-6acc-4acc-ae17-24ab4c0e143a"/>
+				<textFieldExpression><![CDATA[$F{listaObjetos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="1381" y="0" width="95" height="44" isPrintWhenDetailOverflows="true" uuid="ec9ef0d6-a68c-41d3-b6fc-bbc59677fc3e"/>
+				<textFieldExpression><![CDATA[$F{revisar}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

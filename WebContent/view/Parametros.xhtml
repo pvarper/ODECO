@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<h:head>
+	<title>Parametros Generales</title>
+</h:head>
+<body>
+	<ui:composition template="./../resources/templates/simple.xhtml">
+		<ui:define name="content">
+			<h:form id="formPanel">
+				<center>
+					<h1>PARAMETROS GENERALES</h1>
+				</center>
+				<p:growl id="grow2" showDetail="true" sticky="true"
+					autoUpdate="true" life="15000" escape="false" />
+				<c:forEach items="#{parametrosBean.menu}" var="formulario">
+					<p:panel header="#{formulario.descripcion}" collapsed="true"
+						toggleable="true">
+						<h:panelGrid style="width:100%" columns="2">
+							<c:forEach
+								items="#{parametrosBean.getParametrosDeMenu(formulario)}"
+								var="par">
+
+								<h:outputText value="#{par.descripcion}" style="width:15em;" />
+								<c:choose>
+									<c:when test="#{(par.tipovalor eq 0) or (par.tipovalor eq 4)}">
+										<p:inplace editor="true" saveLabel="Guardar"
+											style="width:100%;margin-left:1em;" cancelLabel="Cancelar">
+											<p:inputText value="#{par.valor}" size="80"
+												validatorMessage="No se permiten caracteres especiales">
+												<f:validateRegex pattern="#{parametrosBean.expresionRegular}" />
+											</p:inputText>
+											<p:ajax event="save"
+												listener="#{parametrosBean.guardarParametro(par)}" />
+										</p:inplace>
+									</c:when>
+									<c:when test="#{par.tipovalor eq 1}">
+										<p:inplace editor="true" saveLabel="Guardar"
+											cancelLabel="Cancelar" style="width:100%;margin-left:1em;">
+											<p:selectOneMenu value="#{par.valor}">
+												<f:selectItems
+													value="#{parametrosBean.getOptions(par.opcionesvalor)}" />
+											</p:selectOneMenu>
+											<p:ajax event="save"
+												listener="#{parametrosBean.guardarParametro(par)}" />
+										</p:inplace>
+									</c:when>
+									<c:when test="#{par.tipovalor eq 3}">
+										<p:inplace editor="true" saveLabel="Guardar"
+											style="width:100%; margin-left:1em;" cancelLabel="Cancelar">
+											<h:inputTextarea row="20" col="400"
+												style="width:100%;float:left" rows="4" value="#{par.valor}"
+												validatorMessage="No se permiten caracteres especiales">
+												<f:validateRegex pattern="#{parametrosBean.expresionRegular}" />
+											</h:inputTextarea>
+											<p:ajax event="save"
+												listener="#{parametrosBean.guardarParametro(par)}" />
+										</p:inplace>
+									</c:when>
+								</c:choose>
+
+							</c:forEach>
+						</h:panelGrid>
+					</p:panel>
+				</c:forEach>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+
+</html>

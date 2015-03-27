@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="#{request.contextPath}/resources/css/styleLoginTV.css"
+			rel="styleSheet" type="text/css" />
+		<link type="text/css" rel="stylesheet"
+			href="%PATH_TO_THEME_FOLDER%/skin.css" />
+		<meta http-equiv="Cache-Control"
+			content="private ,no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<meta http-equiv="X-Frame-Options" content="deny" />
+		
+		<title>ODECO_DIGITAL</title>
+</head>
+
+
+<body>
+
+	<p:growl id="messages" autoUpdate="true" />
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="98">
+			<div id="loginj">
+				<ui:insert name="loginj"></ui:insert>
+				<div id="logo">
+					<ui:insert name="logo"></ui:insert>
+				</div>
+				<div id="headerText">
+					<span>ODECO DIGITAL</span>
+				</div>
+			</div>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<div id="wrap">
+				<div id="content">
+					<div class="nav">
+						<div id="box">
+							<ui:insert name="content">Content</ui:insert>
+						</div>
+					</div>
+				</div>
+			</div>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="south" size="40">
+			<div id="bottom">
+				<div id="footerText">
+					<span> © Copyright Telecel Bolivia - 2015</span>
+				</div>
+			</div>
+		</p:layoutUnit>
+
+	</p:layout>
+
+</body>
+
+</html>
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>Facelet Title</title>
+</h:head>
+<body>
+
+
+
+	<ui:composition template="./../resources/templates/simple.xhtml">
+		<ui:define name="content">
+
+
+			<h:form id="mainForm">
+				<center>
+					<h1>BITACORA</h1>
+					<table width="100%" cellpadding="0" cellspacing="0" border="0"
+						class="contentpaneopen">
+
+
+
+						<tr>
+							<td width="100%"><p:dataTable var="row"
+									value="#{bitacoraForm.listBitacora}" first="0" paginator="true"
+									rows="30"
+									paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="50,100,150">
+									<f:facet name="header">  
+                                        Lista de Palabras Claves  
+                                    </f:facet>
+									<p:column sortBy="#{row.fecha}" filterBy="#{row.fecha}">
+										<f:facet name="header">
+											<h:outputText value="FECHA" />
+										</f:facet>
+										<h:outputText value="#{row.fecha}" />
+									</p:column>
+
+									<p:column sortBy="#{row.accion}" filterBy="#{row.accion}">
+										<f:facet name="header">
+											<h:outputText value="ACCIONES" />
+										</f:facet>
+										<h:outputText value="#{row.accion}" />
+									</p:column>
+
+									<p:column sortBy="#{row.formulario}"
+										filterBy="#{row.formulario}">
+										<f:facet name="header">
+											<h:outputText value="FORMULARIO" />
+										</f:facet>
+										<h:outputText value="#{row.formulario}" />
+									</p:column>
+
+									<p:column sortBy="#{row.usuario}" filterBy="#{row.usuario}">
+										<f:facet name="header">
+											<h:outputText value="USUARIO" />
+										</f:facet>
+										<h:outputText value="#{row.usuario}" />
+									</p:column>
+
+									<p:column sortBy="#{row.direccionIp}"
+										filterBy="#{row.direccionIp}">
+										<f:facet name="header">
+											<h:outputText value="DIRECCION IP" />
+										</f:facet>
+										<h:outputText value="#{row.direccionIp}" />
+									</p:column>
+
+								</p:dataTable></td>
+						</tr>
+
+
+					</table>
+				</center>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</body>
+
+</html>
+

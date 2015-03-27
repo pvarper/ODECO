@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="053dcb6d-594b-4f3d-8cb7-3e4225a69b03">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechareporte" class="java.lang.String"/>
+	<parameter name="Logo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="mes" class="java.lang.String"/>
+	<field name="reclamosAtendidos" class="java.lang.Integer"/>
+	<field name="resueltosPlazoEstablecidos" class="java.lang.Integer"/>
+	<field name="reclamosPendientes" class="java.lang.Integer"/>
+	<field name="reclamosAnulados" class="java.lang.Integer"/>
+	<field name="reclamosAdministrativos" class="java.lang.Integer"/>
+	<field name="antiguedadPendientes" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="134" splitType="Stretch">
+			<staticText>
+				<reportElement x="277" y="25" width="469" height="20" uuid="2e2140ec-38ef-4ab5-a8fa-cb2d2036adb2"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[TABLA DE REGISTRO DE RECLAMACION DIRECTA Nro. 2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="45" width="499" height="30" uuid="9cc3b418-e838-4d3a-be2e-158c97a91709"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[UNIDAD DE PLANIFICACION NORMAS Y GESTION POR RESULTADOS ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="75" width="140" height="20" uuid="562fa77c-c4ab-4e84-86b1-5f4bb36b9e94"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[CONTROL DE RECLAMOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="93" width="606" height="20" uuid="969566c8-9f19-4ad0-8ff9-ec6c2c77990b"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[PROGRAMA DE SEGUIMIENTO CUMPLIMIENTO INSTRUCTIVO PARA LA ATENCION DE RECLAMACIONES (ODECO)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="113" width="359" height="20" uuid="97ebc813-8748-48ee-ab34-25c8a0f11750"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[OFICINA DEL CONSUMIDOR REGISTRO DE RECLAMACIONES DIRECTAS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="0" width="139" height="45" uuid="22479e54-9750-47e1-9122-431165eecb00">
+					<property name="net.sf.jasperreports.export.pdf.tag.colspan" value="3"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yy">
+				<reportElement x="359" y="113" width="70" height="20" uuid="a2e6f38d-5c42-4c07-ac12-eef92d35cc2e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="429" y="113" width="70" height="21" uuid="e10cd21e-d1c6-43e0-b279-ecff4a15e939"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="32">
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="0" width="67" height="32" backcolor="#CCCCCC" uuid="ed374c42-4d29-4eef-93ea-703c576b3358"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[MES	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="68" y="0" width="72" height="32" backcolor="#CCCCCC" uuid="33974012-df34-46be-aea0-f1eb487f4d87"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[RECLAMOS ATENDIDOS EN ODECO (X)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="140" y="0" width="74" height="32" backcolor="#CCCCCC" uuid="adeffb62-69ce-466c-9695-4d6ebf6e6428"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[RESUELTOS EN LOS PLAZOS ESTABLECIDOS (a)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="214" y="0" width="63" height="32" backcolor="#CCCCCC" uuid="808ea06e-7ab9-489a-a07f-bb0b0452368c"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[RECLAMOS PENDIENTES EN ODECO (b)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="0" width="82" height="32" backcolor="#CCCCCC" uuid="ea74cc1e-ff31-4b06-acf5-a2a4ff9db995"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[RECLAMOS ANULADOS ( c )]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="359" y="0" width="70" height="32" backcolor="#CCCCCC" uuid="26cde575-5699-404a-ad8e-c29c135b7eda"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[RECLAMOS ADMINISTRATIVOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="429" y="0" width="70" height="32" backcolor="#CCCCCC" uuid="2804e809-f3ce-42ca-be18-c9d611ad8496"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ANTIGUEDAD DE LOS PENDIETNES]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="68" height="27" uuid="b77875c5-808c-4cde-a916-39eba5b60cb1"/>
+				<textFieldExpression><![CDATA[$F{mes}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="68" y="0" width="72" height="27" uuid="3c9f001b-2d2e-428c-85e9-73a11a3c5c39"/>
+				<textFieldExpression><![CDATA[$F{reclamosAtendidos}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="0" width="74" height="27" uuid="69370803-85d2-436a-b30e-7d6e298e971c"/>
+				<textFieldExpression><![CDATA[$F{resueltosPlazoEstablecidos}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="214" y="0" width="63" height="27" uuid="3fa2adf8-681a-4628-92ef-8dd36ed2bb5c"/>
+				<textFieldExpression><![CDATA[$F{reclamosPendientes}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="277" y="0" width="82" height="27" uuid="35e586f3-ce6b-420b-8d33-58fe3a8ade8c"/>
+				<textFieldExpression><![CDATA[$F{reclamosAnulados}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="359" y="0" width="70" height="27" uuid="bd5d1c88-6902-43a6-91b8-34228cd00d9f"/>
+				<textFieldExpression><![CDATA[$F{reclamosAdministrativos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="429" y="0" width="70" height="27" uuid="6b7b6eef-994a-4c04-ba5f-e4670b2cf576"/>
+				<textFieldExpression><![CDATA[$F{antiguedadPendientes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

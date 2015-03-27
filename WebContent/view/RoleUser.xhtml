@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Facelet Title</title>
+</h:head>
+<body>
+
+	<ui:composition template="./../resources/templates/simple.xhtml">
+		<ui:define name="content">
+
+
+			<h:form id="mainForm">
+				<center>
+					<h1>USUARIOS</h1>
+					<table width="100%" cellpadding="0" cellspacing="0" border="0"
+						class="contentpaneopen">
+						<h:inputHidden value="#{roleUserForm.userId}" />
+						<h:inputHidden value="#{roleUserForm.edit}" />
+
+						<tr>
+							<td align="left" colspan="2"><p:messages id="messages"
+									showDetail="true" autoUpdate="true" /></td>
+						</tr>
+
+						<tr>
+							<td width="100%" align="left"><p:panel
+									header="INFORMACION GENERAL" style="width: 350px">
+									<table id="table">
+										<h:panelGrid id="grid1" columns="2">
+
+											<h:outputText rendered="#{roleUserForm.edit}"
+												value="id Usuario :" />
+											<td align="right"><h:inputText style="width: 180px;"
+													rendered="#{roleUserForm.edit}" disabled="true" size="30"
+													maxlength="30" value="#{roleUserForm.user.usuarioId}"
+													validatorMessage="Solo caracteres numericos en Id Usuario">
+													<f:validateRegex pattern="#{roleUserForm.expresionRegularNumero}" />
+												</h:inputText></td>
+
+
+
+											<h:outputText value="Usuario : *" />
+											<td align="right"><p:inputText size="30" maxlength="30"
+													style="width: 180px;" value="#{roleUserForm.user.login}"
+													validatorMessage="No se permiten caracteres especiales en Usuario">
+													<f:validateRegex pattern="#{roleUserForm.expresionRegular}" />
+
+												</p:inputText></td>
+
+
+
+											<h:outputText value="Teléfono :" />
+											<td align="right"><p:inputText size="30" maxlength="30"
+													style="width: 180px;" value="#{roleUserForm.user.telefono}"
+													validatorMessage="Solo caracteres numericos en Telefono">
+													<f:validateRegex pattern="#{roleUserForm.expresionRegularNumero}" />
+												</p:inputText></td>
+
+											<h:outputText value="Ciudad Donde Trabaja : *" />
+											<td align="right"><p:selectOneMenu style="width: 188px;"
+													value="#{roleUserForm.selectCiudad}"
+													onselect="#{roleUserForm.selectCiudad}">
+													<f:attribute name="optionClasses" value="option1, option2" />
+													<f:selectItems value="#{roleUserForm.selectItemsCiudad}" />
+												</p:selectOneMenu></td>
+
+										</h:panelGrid>
+
+										<h:panelGrid id="grid2" columns="2">
+											<h:outputText value="Rol : *" />
+											<td align="right"><p:selectOneMenu style="width: 188px;"
+													value="#{roleUserForm.select}" ajax="true"
+													onselect="#{roleUserForm.select}">
+													<p:ajax event="valueChange"
+														listener="#{roleUserForm.RenderResponsable(roleUserForm.select)}"
+														update="grid2" />
+													<f:attribute name="optionClasses" value="option1, option2" />
+													<f:selectItems value="#{roleUserForm.selectItems}" />
+												</p:selectOneMenu></td>
+
+											<h:outputLabel value="Especial : " styleClass="name"
+												rendered="#{roleUserForm.booleanRenderEspecial == true ? false : true}" />
+											<p:selectBooleanCheckbox
+												rendered="#{roleUserForm.booleanRenderEspecial == true ? false : true}"
+												value="#{roleUserForm.especial}" ajax="true">
+											</p:selectBooleanCheckbox>
+
+
+											<h:outputText value="Responsable  :" id="rolcombo2"
+												rendered="#{roleUserForm.booleanRender == true ? true : false}" />
+											<td align="right"><p:selectOneMenu id="rolcombo"
+													style="width: 188px;"
+													value="#{roleUserForm.selectResponsable}" ajax="true"
+													onselect="#{roleUserForm.selectResponsable}"
+													rendered="#{roleUserForm.booleanRender == true ? true : false}">
+													<f:attribute name="optionClasses" value="option1, option2" />
+													<f:selectItems
+														value="#{roleUserForm.selectItemsResponsables}" />
+												</p:selectOneMenu></td>
+
+										</h:panelGrid>
+
+										<p:commandButton onclick="loading();"
+											action="#{roleUserForm.saveUser}"
+											styleClass="button validate" id="buttonValidate"
+											value="Guardar" />
+										<p:commandButton onclick="loading();"
+											action="#{roleUserForm.newUser}" id="buttonNuevo"
+											value="Limpiar" />
+
+
+									</table>
+
+									<tr>
+										<td width="100%" align="left"><br></br> <br></br> <p:dataTable
+												var="row" value="#{roleUserForm.listUser}" paginator="true"
+												rows="10"
+												paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+												<f:facet name="header">  
+                                        LISTA DE USUARIOS 
+                                    </f:facet>
+
+												<p:column style="text-align: left;" filterBy="#{row.login}"
+													filterMatchMode="contains">
+													<f:facet name="header">
+														<h:outputText value="USUARIO" />
+													</f:facet>
+													<h:outputText value="#{row.login}" />
+												</p:column>
+
+												<p:column style="text-align: left;" filterBy="#{row.nombre}"
+													filterMatchMode="contains">
+													<f:facet name="header">
+														<h:outputText value="NOMBRE" />
+													</f:facet>
+													<h:outputText value="#{row.nombre}" />
+												</p:column>
+
+												<p:column filterBy="#{row.telefono}"
+													filterMatchMode="contains">
+													<f:facet name="header">
+														<h:outputText value="TELEFONO" />
+													</f:facet>
+													<h:outputText value="#{row.telefono}" />
+												</p:column>
+
+												<p:column filterBy="#{row.usuario.nombre}"
+													filterMatchMode="contains">
+													<f:facet name="header">
+														<h:outputText value="Responsable" />
+													</f:facet>
+													<h:outputText value="#{row.usuario.nombre}" />
+												</p:column>
+
+												<p:column filterBy="#{row.ciudad.nombre}"
+													filterMatchMode="contains">
+													<f:facet name="header">
+														<h:outputText value="Ciudad de Trabajo" />
+													</f:facet>
+													<h:outputText value="#{row.ciudad.nombre}" />
+												</p:column>
+
+												<p:column filterBy="#{row.correo}"
+													filterMatchMode="contains">
+													<f:facet name="header">
+														<h:outputText value="Correo" />
+													</f:facet>
+													<h:outputText value="#{row.correo}" />
+												</p:column>
+
+												<p:column filterBy="#{row.rol.nombre}"
+													filterMatchMode="contains">
+													<f:facet name="header">
+														<h:outputText value="ROL" />
+													</f:facet>
+													<h:outputText value="#{row.rol.nombre}" />
+												</p:column>
+
+
+
+
+												<p:column style="text-align: center;">
+													<f:facet name="header">
+														<h:outputText value="ACCIONES" />
+													</f:facet>
+
+													<h:commandLink id="editLink"
+														action="#{roleUserForm.editRoleUser}">
+														<h:graphicImage id="editImage" alt="Modificar"
+															url="/resources/icons/edit.png" styleClass="icon" />
+														<f:param name="user_id" value="#{row.usuarioId}" />
+													</h:commandLink>
+													<h:commandLink id="deleteLink"
+														action="#{roleUserForm.deleteRoleUser}"
+														onclick="return confirm('¿Esta seguro que desea eliminar este registro?');">
+														<h:graphicImage id="deleteImage" alt="Eliminar"
+															url="/resources/icons/delete.png" styleClass="icon" />
+														<f:param name="user_id" value="#{row.usuarioId}" />
+													</h:commandLink>
+												</p:column>
+
+
+											</p:dataTable></td>
+									</tr>
+
+
+								</p:panel></td>
+						</tr>
+
+
+
+					</table>
+				</center>
+
+			</h:form>
+
+
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+
+</html>

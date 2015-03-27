@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="ODECO_DIGITAL" transaction-type="JTA">
+	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+	<jta-data-source>odecoDigitalDS</jta-data-source>
+	
+	<class>micrium.odeco.model.Flujo</class>
+	<class>micrium.odeco.model.Adjunto</class>
+	<class>micrium.user.model.Bitacora</class>
+	<class>micrium.odeco.model.Calendario</class>
+	<class>micrium.odeco.model.Ciudad</class>
+	<class>micrium.odeco.model.ColaCoordinador</class>
+	<class>micrium.odeco.model.Devuelto</class>
+	<class>micrium.user.model.Formulario</class>
+	<class>micrium.odeco.model.FormularioOdeco</class>
+	<class>micrium.user.model.GrupoAd</class>
+	<class>micrium.odeco.model.Localidad</class>
+	<class>micrium.odeco.model.MedioNotificacion</class>
+	<class>micrium.odeco.model.MotivoReclamo</class>
+	<class>micrium.odeco.model.ObjetoReclamo</class>
+	<class>micrium.odeco.model.Parametro</class>
+	<class>micrium.odeco.model.RespuestaOdeco</class>
+	<class>micrium.user.model.Rol</class>
+	<class>micrium.user.model.RolCalendario</class>
+	<class>micrium.user.model.RolCalendarioPK</class>
+	<class>micrium.user.model.RolFormulario</class>
+	<class>micrium.user.model.RolFormularioPK</class>
+	<class>micrium.odeco.model.TipoFormulario</class>
+	<class>micrium.user.model.Usuario</class>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
+			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="false" />
+			<!-- <property name="hibernate.default_catalog" value="mydb" /> -->
+			<property name="hibernate.default_schema" value="public" />
+			<!-- <property name="hibernate.default_schema" value="modaweb" /> -->
+			<!-- Only relevant if Seam is loading the persistence unit (Java SE bootstrap) -->
+		
+			<property name="hibernate.transaction.manager_lookup_class"
+				value="org.hibernate.transaction.JBossTransactionManagerLookup" />
+
+		</properties>
+		
+	</persistence-unit>
+</persistence>

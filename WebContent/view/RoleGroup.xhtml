@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<h:head>
+	<title>Facelet Title</title>
+</h:head>
+<body>
+
+
+	<ui:composition template="./../resources/templates/simple.xhtml">
+		<ui:define name="content">
+
+
+			<h:form id="mainForm">
+				<center>
+					<h1>GRUPOS</h1>
+					<table width="100%" cellpadding="0" cellspacing="0" border="0"
+						class="contentpaneopen">
+						<h:inputHidden value="#{roleGroupForm.edit}" />
+						<h:inputHidden value="#{roleGroupForm.groupId}" />
+					
+						<tr>
+							<td align="left" colspan="2"><p:messages id="messages"
+									showDetail="true" autoUpdate="true" /></td>
+						</tr>
+
+						<tr>
+							<td width="100%" align="left"><p:panel
+									header="INFORMACION GENERAL" style="width: 350px">
+
+									<table>
+
+										<tr>
+											<td align="left"><h:outputText
+													rendered="#{roleGroupForm.edit}" value="Id Grupo :" /></td>
+											<td align="left"><h:outputText
+													rendered="#{roleGroupForm.edit}"  size="30" disabled="true"
+													maxlength="30" value="#{roleGroupForm.group.grupoId}" /></td>
+										</tr>
+
+										<tr>
+											<td align="left"><h:outputText
+													value="Nombre Grupo En AD:" /></td>
+											<td align="left"><h:inputText size="30" maxlength="30"  disabled="true"
+													value="#{roleGroupForm.group.nombre}" /></td>
+										</tr>
+
+										<tr>
+											<td align="left"><h:outputText
+													value="Descripcion de AD:" /></td>
+											<td align="left"><h:inputText size="30" maxlength="30" disabled="true"
+													value="#{roleGroupForm.group.detalle}" /></td>
+										</tr>
+
+										<tr>
+											<td align="left"><h:outputText value="Rol :" /></td>
+											<td align="left"><h:selectOneMenu
+													value="#{roleGroupForm.select}" disabled="true"
+													onselect="#{roleGroupForm.select}">
+													<f:attribute name="optionClasses" value="option1, option2" />
+													<f:selectItems value="#{roleGroupForm.selectItems}" />
+												</h:selectOneMenu></td>
+
+										</tr>
+										<tr>
+											<td align="left">
+												<h:commandButton onclick="loading();"
+													action="#{roleGroupForm.saveGroup}" disabled="true"
+													styleClass="button validate" id="buttonValidate"
+													value="Guardar" />
+											</td>
+											<td align="left">
+												<h:commandButton onclick="loading();" disabled="true"
+													action="#{roleGroupForm.newGroup}" id="buttonNuevo"
+													value="Limpiar" />
+											</td>
+										</tr>
+
+									</table>
+								</p:panel></td>
+						</tr>
+						<tr>
+							<td width="100%" align="left"><br /> <br /> <p:dataTable
+									var="row" value="#{roleGroupForm.listGroup}" paginator="true"
+									rows="10"
+									paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15">
+									<f:facet name="header">  
+                                        LISTA DE GRUPOS DE ACTIVE DIRECTORY
+                                    </f:facet>
+
+									<p:column style="text-align: left;">
+										<f:facet name="header">
+											<h:outputText value="GRUPO EN ACTIVE DIRECTORY" />
+										</f:facet>
+										<h:outputText value="#{row.nombre}" />
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="ROL" />
+										</f:facet>
+										<h:outputText value="#{row.rol.nombre}" />
+									</p:column>
+
+									<p:column style="text-align: left;">
+										<f:facet name="header">
+											<h:outputText value="ACCIONES" />
+										</f:facet>
+
+										<h:commandLink id="editLink"
+											action="#{roleGroupForm.editRoleGroup}">
+											<h:graphicImage id="editImage" alt="Modificar"
+												url="/resources/icons/edit.png" styleClass="icon" />
+											<f:param name="groupId" value="#{row.grupoId}" />
+										</h:commandLink>
+
+										<h:commandLink id="deleteLink"
+											action="#{roleGroupForm.deleteRoleGroup}"
+											onclick="return confirm('¿Esta seguro que desea eliminar este registro?');">
+											<h:graphicImage id="deleteImage" alt="Eliminar"
+												url="/resources/icons/delete.png" styleClass="icon" />
+											<f:param name="groupId" value="#{row.grupoId}" />
+										</h:commandLink>
+									</p:column>
+
+
+								</p:dataTable></td>
+						</tr>
+
+
+					</table>
+				</center>
+
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+
+</html>
