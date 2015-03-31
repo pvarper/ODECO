@@ -484,7 +484,7 @@ public class FormularioOdecoBean implements Serializable {
 							null,
 							new FacesMessage(FacesMessage.SEVERITY_ERROR,
 									"Mensaje de error",
-									"Es Usuario Staff, Flujo en true"));
+									"El usuario no es Agente, Flujo en true"));
 					
 					return "";
 					
@@ -1095,7 +1095,7 @@ public class FormularioOdecoBean implements Serializable {
 		
 	}
 	
-	public  void handleFileUpload(FileUploadEvent event){
+	public String handleFileUpload(FileUploadEvent event){
 		//onclick="statusDialog.show()" oncomplete="statusDialog.hide()"
 		//try {
 			log.debug("[handleFileUpload] se va adjuntar el archivo");
@@ -1105,7 +1105,8 @@ public class FormularioOdecoBean implements Serializable {
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR,
 								"Notificacion", "Seleccione primero una ciudad de reclamacion"));
-				return;
+			
+				return "";
 			}
 			
 			HttpServletRequest request = (HttpServletRequest) FacesContext
@@ -1149,7 +1150,7 @@ public class FormularioOdecoBean implements Serializable {
 						new FacesMessage(FacesMessage.SEVERITY_ERROR,
 								"Notificacion", micrium.util.Parameter.MENSAJE_ADJUNTOS_ERROR));
 				log.error("[handleFileUpload] Notificacion : No Se adjunto el archivo",e);
-				return ;
+				return "";
 			}
 			// copyFile(event.getFile().getFileName(),
 			// event.getFile().getInputstream());
@@ -1158,7 +1159,7 @@ public class FormularioOdecoBean implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_INFO,
 							"Notificacion", micrium.util.Parameter.MENSAJE_ADJUNTOS));
 			log.debug("[handleFileUpload] Notificacion : Se adjunto Correctamente el archivo "+event.getFile().getFileName());
-			
+			return "";
 		/*} catch (Exception e2) {
 			// TODO: handle exception
 			FacesContext.getCurrentInstance().addMessage(

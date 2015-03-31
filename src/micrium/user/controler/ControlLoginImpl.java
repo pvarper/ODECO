@@ -135,7 +135,7 @@ public class ControlLoginImpl implements Serializable {
 		if (swLogin && password.equals(ParametersCM.PASSWORD_USER))
 			return 1;
 		else
-			return 1;
+			return 2;
 	}
 
 	public void addBitacoraLogin(String strIdUs, String address, int idRol) {

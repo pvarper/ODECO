@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<head>
+
+<f:facet name="first">
+	<meta http-equiv="X-UA-Compatible" content="IE=8,9" />
+</f:facet>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Cache-Control" content="private ,no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+<link href="#{request.contextPath}/resources/css/layout_login.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="#{request.contextPath}/resources/js/aplication.js"></script>
+<script type="text/javascript" src="#{request.contextPath}/resources/js/base64.js"></script>
+
+<link rel="shortcut icon" href="#{request.contextPath}/resources/icons/tigo.png" type="image/png" />
+<link type="text/css" rel="stylesheet" href="%PATH_TO_THEME_FOLDER%/skin.css" />
+<title>DEVOLVATO</title>
+
+</head>
+
+
+<body>
+
+	<div id="header">
+		<ui:insert name="header"></ui:insert>
+
+		<h:graphicImage style="padding-left: 20px;padding-top: 2px;" value="/resources/css/images/logo.png" width="150" height="75" />
+
+		<div id="title">
+			<span>ODECO DIGITAL</span>
+		</div>
+	</div>
+
+
+	<div id="content">
+		<ui:insert name="content">Content</ui:insert>
+	</div>
+
+	<div id="layoutPie" class="ui-layout-unit ui-widget ui-widget-content ui-corner-all ui-layout-south ui-layout-pane ui-layout-pane-south"
+		style="background: none repeat scroll 0px 0px rgb(180, 205, 230); position: absolute; margin: 0px; top: auto; bottom: 0px; left: 0px; right: 0px; width: auto; z-index: 0; height: 43px; display: block; visibility: visible;">
+		<div class="ui-layout-unit-content ui-widget-content" style="position: relative; height: 40px; visibility: visible;">
+			<div id="bottom">
+				<div id="footerText" align="center">
+					<span> © Copyright Telecel Bolivia - 2015</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+

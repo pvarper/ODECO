@@ -73,9 +73,9 @@ function checkCurrentWebBrowser() {
 //Global events every key press
 var browser = checkCurrentWebBrowser();
 if(browser == 'msie'){
-	document.onkeydown = function() { return !checkDisableBackspace(event); };
+	document.onkeydown = function() { return !checkDisableBackspace(event); }
 }else if(browser == 'firefox'){
-	document.onkeypress = function(e) { return !checkDisableBackspace(e); };
+	document.onkeypress = function(e) { return !checkDisableBackspace(e); }
 }else if(browser == 'chrome'){
-	document.onkeydown = function(e) { return !checkDisableBackspace(e); };
+	document.onkeydown = function(e) { return !checkDisableBackspace(e); }
 }

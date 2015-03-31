@@ -57,8 +57,8 @@
 								<h:outputText value="#{row.formularioOdecoId}" />
 							</p:column>
 
-							<p:column id="codigoReclamacionColumna" headerText="CODIGO DE RECLAMO"
-								sortBy="#{row.codigoReclamacion}"
+							<p:column id="codigoReclamacionColumna"
+								headerText="CODIGO DE RECLAMO" sortBy="#{row.codigoReclamacion}"
 								filterBy="#{row.codigoReclamacion}" filterMatchMode="contains"
 								style="text-align: center; width:25%;" filterStyle="width:80%">
 								<h:outputText value="#{row.codigoReclamacion}" />
@@ -114,8 +114,8 @@
 							</p:column>
 
 
-							<p:column id="estadoRespuestaColumna" headerText="ESTADO RESPUESTA"
-								sortBy="#{row.estadoRespuesta}"
+							<p:column id="estadoRespuestaColumna"
+								headerText="ESTADO RESPUESTA" sortBy="#{row.estadoRespuesta}"
 								filterBy="#{row.estadoRespuesta}" filterMatchMode="contains"
 								style="text-align: center; width:25%;" filterStyle="width:80%">
 								<h:outputText value="#{row.estadoRespuesta}" />
@@ -177,14 +177,14 @@
 					<h:outputText value="Fecha Registro" style="font-weight : bold;" />
 					<h:outputText
 						value="#{formularioOdecoBean.selectOdeco.fechaReclamo}"
-						id="model4" >
+						id="model4">
 						<f:convertDateTime pattern="dd-MM-yyyy" />
-						</h:outputText>
+					</h:outputText>
 					<h:outputText value="Fecha Incidencia" style="font-weight : bold;" />
 					<h:outputText
-						value="#{formularioOdecoBean.selectOdeco.fechaIncidencia}" >
+						value="#{formularioOdecoBean.selectOdeco.fechaIncidencia}">
 						<f:convertDateTime pattern="dd-MM-yyyy" />
-						</h:outputText>
+					</h:outputText>
 					<h:outputText value="Objetos Reclamos" style="font-weight : bold;" />
 					<h:outputText
 						value="#{formularioOdecoBean.getObjetosReclamos(formularioOdecoBean.selectOdeco.formularioOdecoId)}" />
@@ -207,11 +207,10 @@
 						style="font-weight : bold;" />
 					<h:outputText
 						value="#{formularioOdecoBean.selectOdeco.medioNotificacion}" />
-					
-					<h:outputText value="Forma de Registro"
-						style="font-weight : bold;" />
+
+					<h:outputText value="Forma de Registro" style="font-weight : bold;" />
 					<h:outputText
-						value="#{formularioOdecoBean.selectOdeco.formaRegistro}" />	
+						value="#{formularioOdecoBean.selectOdeco.formaRegistro}" />
 
 					<h:outputText value="Detalle Motivo " style="font-weight : bold;" />
 					<h:outputText
@@ -243,9 +242,9 @@
 					<h:outputText value="Fecha Cerrado" style="font-weight : bold;" />
 					<h:outputText
 						value="#{formularioOdecoBean.selectOdeco.fechaCerrado}"
-						id="model8" >
+						id="model8">
 						<f:convertDateTime pattern="dd-MM-yyyy" />
-						</h:outputText>
+					</h:outputText>
 					<h:outputText value="Linea Reclamo" style="font-weight : bold;" />
 					<h:outputText
 						value="#{formularioOdecoBean.selectOdeco.lineaReclamo}" />
@@ -258,8 +257,7 @@
 				closable="false" appendToBody="true">
 
 				<h:form id="formPanel">
-					<p:growl id="growl" showDetail="true" sticky="false" life="3000" 
-						autoUpdate="true" />
+
 					<center>
 						<h1>Formulario ODECO Primera Instancia</h1>
 						<p:scrollPanel mode="native" style="height:550px">
@@ -282,8 +280,8 @@
 									</p:selectOneMenu>
 
 									<h:outputLabel value="Codigo Reclamación : *" styleClass="name" />
-									<p:inputText id="codigoReclamacion" rows="1" cols="40" readonly="true"
-										style="width: 180px;"
+									<p:inputText id="codigoReclamacion" rows="1" cols="40"
+										readonly="true" style="width: 180px;"
 										value="#{formularioOdecoBean.codigoReclamacion}"
 										maxlength="50" />
 
@@ -293,7 +291,8 @@
 										value="#{formularioOdecoBean.oferta.nombreReclamante}"
 										maxlength="50"
 										validatorMessage="No se permiten caracteres especiales en Nombre Reclamante">
-										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegular}" />
+										<f:validateRegex
+											pattern="#{formularioOdecoBean.expresionRegular}" />
 									</p:inputText>
 
 									<h:outputLabel value="Nombre Titular : *" styleClass="name" />
@@ -302,7 +301,8 @@
 										value="#{formularioOdecoBean.oferta.nombreTitular}"
 										maxlength="50"
 										validatorMessage="No se permiten caracteres especiales en Nombre Titular">
-										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegular}" />
+										<f:validateRegex
+											pattern="#{formularioOdecoBean.expresionRegular}" />
 									</p:inputText>
 
 									<h:outputLabel value="Teléfono de Referencia : *"
@@ -310,16 +310,20 @@
 									<p:inputText id="telefono" rows="1" cols="40"
 										style="width: 180px;"
 										value="#{formularioOdecoBean.oferta.telefonoReferencia}"
-										maxlength="8" validatorMessage="Solo caracteres numericos en Telefono de Referencia">
-										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegularNumero}" />
+										maxlength="8"
+										validatorMessage="Solo caracteres numericos en Telefono de Referencia">
+										<f:validateRegex
+											pattern="#{formularioOdecoBean.expresionRegularNumero}" />
 									</p:inputText>
 
 									<h:outputLabel value="Línea Reclamo : *" styleClass="name" />
 									<p:inputText id="linea" rows="1" cols="40"
 										style="width: 180px;"
 										value="#{formularioOdecoBean.oferta.lineaReclamo}"
-										maxlength="8" validatorMessage="Solo caracteres numericos en Linea Reclamo">
-										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegularNumero}" />
+										maxlength="8"
+										validatorMessage="Solo caracteres numericos en Linea Reclamo">
+										<f:validateRegex
+											pattern="#{formularioOdecoBean.expresionRegularNumero}" />
 									</p:inputText>
 
 									<h:outputLabel value="Direccion de Reclamo: *"
@@ -329,7 +333,8 @@
 										value="#{formularioOdecoBean.oferta.direccionDomicilio}"
 										maxlength="95"
 										validatorMessage="No se permiten caracteres especiales en Direccion de reclamo">
-										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegular}" />
+										<f:validateRegex
+											pattern="#{formularioOdecoBean.expresionRegular}" />
 									</p:inputText>
 
 									<h:outputLabel value="Direccion Notificación : *"
@@ -339,7 +344,8 @@
 										value="#{formularioOdecoBean.oferta.direccionNotificacion}"
 										maxlength="95"
 										validatorMessage="No se permiten caracteres especialesen Direccion de Notificacion">
-										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegular}" />
+										<f:validateRegex
+											pattern="#{formularioOdecoBean.expresionRegular}" />
 									</p:inputText>
 
 									<h:outputLabel value="Fecha de Reclamo: " styleClass="name" />
@@ -395,7 +401,8 @@
 										maxlength="50" />
 
 									<h:outputText value="Localidad/Sucursal : *" />
-									<p:selectOneMenu id="localidadSucursal" value="#{formularioOdecoBean.selectCiudad}"
+									<p:selectOneMenu id="localidadSucursal"
+										value="#{formularioOdecoBean.selectCiudad}"
 										style="width: 188px; "
 										onselect="#{formularioOdecoBean.selectCiudad}">
 										<f:attribute name="optionClasses" value="option1, option2" />
@@ -411,10 +418,12 @@
 									<p:inputText id="fax" rows="1" cols="40" style="width: 180px;"
 										value="#{formularioOdecoBean.oferta.fax}" maxlength="8"
 										validatorMessage="Solo caracteres numericos en Fax">
-										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegularNumero}" />
+										<f:validateRegex
+											pattern="#{formularioOdecoBean.expresionRegularNumero}" />
 									</p:inputText>
 
-									<h:outputLabel value="Medio de Notificaci&#243;n" styleClass="name" />
+									<h:outputLabel value="Medio de Notificaci&#243;n"
+										styleClass="name" />
 									<p:selectOneMenu id="medioNotificacion" style="width: 188px; "
 										value="#{formularioOdecoBean.selectMedioNotificacion}"
 										onselect="#{formularioOdecoBean.selectMedioNotificacion}">
@@ -424,16 +433,23 @@
 									</p:selectOneMenu>
 
 									<h:outputText value="Cargar Adjuntos : *" />
+
 									<p:fileUpload
 										fileUploadListener="#{formularioOdecoBean.handleFileUpload}"
-										onstart="statusDialog.show()" oncomplete="statusDialog.hide()"
+										ajax="false"
+										onclick="PrimeFaces.monitorDownload(start, stop);"
 										mode="advanced" auto="true" label="Seleccionar Archivo"
 										dragDropSupport="false" sizeLimit="104857600" multiple="true"
-										update="display,growl" invalidFileMessage="El tipo de Archivo no es correcto"
+										update="formPanel"
+										invalidFileMessage="El tipo de Archivo no es correcto"
 										allowTypes="/(\.|\/)(txt|csv|xlsx|xls|doc|png|pdf|jpg|docx|jpeg)$/"
 										invalidSizeMessage="El tamaño es demasiado grande">
+										<p:growl id="growl" showDetail="true" sticky="false"
+											life="3000" autoUpdate="true" />
 									</p:fileUpload>
-									
+
+
+
 									<h:outputLabel value="Forma de Registro: *" styleClass="name" />
 									<p:selectOneMenu id="formaRegistro" style="width: 188px; "
 										value="#{formularioOdecoBean.formaRegistro}"
@@ -445,6 +461,16 @@
 
 
 								</h:panelGrid>
+								<p:ajaxStatus onstart="statusDialog.show();"
+									oncomplete="statusDialog.hide();" />
+								<script type="text/javascript">
+				                            function start() {
+				                                PF('statusDialog').show();
+				                            }
+				                            function stop() {
+				                                PF('statusDialog').hide();
+				                            }
+                        			</script>
 
 								<h:panelGrid columns="1">
 									<p:outputPanel id="display"
@@ -461,7 +487,8 @@
 										value="#{formularioOdecoBean.oferta.detalleMotivoReclamacion}"
 										maxlength="420"
 										validatorMessage="No se permiten caracteres especiales en Detalle de la Respuesta">
-										<f:validateRegex pattern="#{formularioOdecoBean.expresionRegular}" />
+										<f:validateRegex
+											pattern="#{formularioOdecoBean.expresionRegular}" />
 									</p:inputTextarea>
 
 								</h:panelGrid>
@@ -491,6 +518,7 @@
 										oncomplete="dlg3.hide();" />
 								</h:panelGrid>
 							</p:panel>
+
 						</p:scrollPanel>
 					</center>
 				</h:form>
@@ -505,6 +533,7 @@
 					url="/resources/icons/ajax-loader-bar.gif" styleClass="icon" />
 
 			</p:dialog>
+
 
 			<p:dialog header="Adjuntos" widgetVar="dlg2" modal="true"
 				closeOnEscape="true" resizable="false" showEffect="fade"

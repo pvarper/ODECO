@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
 <body>
@@ -13,7 +12,7 @@
 
 
 		<ui:define name="content">
-			<h:form>
+			<h:form id="formLogin">
 				<center>
 
 
@@ -29,28 +28,25 @@
 									<tr>
 										<td align="right"><div id="logintitle"
 												style="color: #7C7C7C; text-size: 30px; font-weight: bold;">Usuario:</div></td>
-										<td align="left"><p:inputText id="userId"
-												styleClass="form-control" maxlength="50"
-												value="#{login.userId}"
-												validatorMessage="No se permiten caracteres especiales en Usuario">
-												<f:validateRegex pattern="^[0-9A-Za-z_ ñáéíóúÑÁÉÍÓÚ*.]+$" />
-											</p:inputText></td>
+										<td align="left"><h:inputText id="userId"
+												styleClass="form-control" value="#{login.userId}"
+												required="false" label="Usuario" autocomplete="off" maxlength="50"
+												validatorMessage="El campo Usuario contiene caracteres Invalidos..">
+												<f:validateRegex pattern="^[0-9A-Za-z_ ñáéíóúÑÁÉÍÓÚ*.-/]+$" />
+											</h:inputText></td>
 									</tr>
 									<tr>
 										<td align="right"><div id="logintitle"
 												style="color: #7C7C7C; text-size: 30px; font-weight: bold;">Contraseña:</div></td>
-										<td align="left"><h:inputSecret id="password"
-												styleClass="form-control" maxlength="50"
-												value="#{login.password}" autocomplete="off"
-												validatorMessage="No se permiten caracteres especiales en Contraseña">
-												<f:validateRegex pattern="^[0-9A-Za-z_ ñáéíóúÑÁÉÍÓÚ*.]+$" />
-											</h:inputSecret></td>
+										<td align="left"><h:inputSecret id="password" maxlength="50"
+												styleClass="form-control" value="#{login.password}"
+												autocomplete="off" /></td>
 									</tr>
 									<tr>
 
 										<td colspan="2" align="center"><h:commandButton
-												styleClass="btn" id="login" action="#{login.verifyLogin}"
-												value="Iniciar sesion" /></td>
+												styleClass="btn" onclick="encryptPassword();" id="login"
+												action="#{login.verifyLogin}" value="Iniciar sesion" /></td>
 									</tr>
 								</table>
 
@@ -59,8 +55,9 @@
 						</tr>
 						<tr>
 							<td colspan="2" align="center"><h:messages
-									styleClass='error' for="userId" showDetail='false' /> <h:outputLabel
-									styleClass="error" value="#{login.messageError}"
+									styleClass='error' for="userId" showDetail='false'
+									style="color: red" /> <h:outputLabel styleClass="error"
+									value="#{login.messageError}"
 									style="color: #B71B1B; text-size: 15px;" /></td>
 						</tr>
 					</table>

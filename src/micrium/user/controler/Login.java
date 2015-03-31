@@ -20,6 +20,8 @@ import org.primefaces.component.submenu.Submenu;
 import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.MenuModel;
 
+import sun.misc.BASE64Decoder;
+
 @ManagedBean
 @SessionScoped
 public class Login implements Serializable {
@@ -54,14 +56,20 @@ public class Login implements Serializable {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public String verifyLogin() {
-
+		System.out.println("PASS-Encrypt:" + password);
 		String str = controler.validateIngreso(userId, password);
 		if (!str.isEmpty()) {
 			messageError = str;
 			return "";
 
 		}
-
+		try {
+			decryptPasswordBase64();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		System.out.println("PASS-DescEncryp:" + password);
 		int valid = (Parameter.swActive.equals("true")) ? ActiveDirectory.existUser(userId, password) : controler.existUser(userId, password);
 		if (valid == ActiveDirectory.EXIT_USER) {
 
@@ -240,6 +248,10 @@ public class Login implements Serializable {
 
 	public String getMessageError() {
 		return messageError;
+	}
+	private void decryptPasswordBase64() throws Exception {
+		BASE64Decoder decoder = new BASE64Decoder();
+		this.password = new String(decoder.decodeBuffer(password), "UTF-8");
 	}
 
 }
